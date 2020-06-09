@@ -13,19 +13,19 @@
 
 					<div class="col-12 col-lg-5">
 
-						<a href="<?php echo $item['ruta'] ?>"><h5 class="d-block d-lg-none py-3"><?php echo $item['titulo']; ?></h5></a>
+						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><h5 class="d-block d-lg-none py-3"><?php echo $item['titulo']; ?></h5></a>
 
-						<a href="<?php echo $item['ruta'] ?>"><img src="<?php echo $item['img']; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
+						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><img src="<?php echo $item['img']; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
 
 					</div>
 
 					<div class="col-12 col-lg-7 introArticulo">
 
-						<a href="<?php echo $item['ruta'] ?>"><h4 class="d-none d-lg-block"><?php echo $item['titulo']; ?></h4></a>
+						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><h4 class="d-none d-lg-block"><?php echo $item['titulo']; ?></h4></a>
 
 						<p class="my-2 my-lg-5"><?php echo $item['descripcion']; ?></p>
 
-						<a href="<?php echo $item['ruta'] ?>" class="float-right">Leer Más</a>
+						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>" class="float-right">Leer Más</a>
 
 						<div class="fecha"><?php echo $item['fecha']; ?></div>
 
@@ -36,7 +36,7 @@
 				<hr class="mb-4 mb-lg-5" style="border: 1px solid #79FF39">
 				<?php endforeach?>
 
-				<!-- Paginación -->
+				<!-- FIXME:Paginación -->
 				<div class="container d-none d-md-block">
 					<?php if ($articulos[0]['id'] != 'Error: vacío'): ?>
 					<ul class="pagination justify-content-center">
@@ -54,7 +54,7 @@
 						<li class="page-item next <?php echo ($datos_pag['pagina_actual'] == $datos_pag['total_paginas']) ? 'disabled' : ''; ?>"><a href="<?php echo ($datos_pag['pagina_actual'] + 1); ?>" class="page-link"><i class="fas fa-angle-right"></i></a></li>
 
 						<?php if ($datos_pag['seccion_actual'] != $datos_pag['total_seccion']): ?>
-						<li class="page-item first "><a href="<?php echo $datos_pag['total_seccion'] ?>" class="page-link">Último</a></li>
+						<li class="page-item first "><a href="<?php echo $datos_pag['total_paginas'] ?>" class="page-link">Último</a></li>
 						<?php endif?>
 
 					</ul>

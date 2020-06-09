@@ -6,9 +6,9 @@
 
 		<ul class="breadcrumb bg-white p-0 mb-2 mb-md-4">
 
-			<li class="breadcrumb-item inicio"><a href="index.html">Inicio</a></li>
+			<li class="breadcrumb-item inicio"><a href="<?php echo $blog['dominio']; ?>">Inicio</a></li>
 
-			<li class="breadcrumb-item active">Mi viaje por Suramérica</li>
+			<li class="breadcrumb-item active"><?php echo $articulos[0]['cat_descripcion']; ?></li>
 
 		</ul>
 
@@ -25,19 +25,19 @@
 
 					<div class="col-12 col-lg-5">
 
-						<a href="<?php echo $item['ruta'] ?>"><h5 class="d-block d-lg-none py-3"><?php echo $item['titulo']; ?></h5></a>
+						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><h5 class="d-block d-lg-none py-3"><?php echo $item['titulo']; ?></h5></a>
 
-						<a href="<?php echo $item['ruta'] ?>"><img src="<?php echo $item['img']; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
+						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><img src="<?php echo $blog['dominio'] . $item['img']; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
 
 					</div>
 
 					<div class="col-12 col-lg-7 introArticulo">
 
-						<a href="<?php echo $item['ruta'] ?>"><h4 class="d-none d-lg-block"><?php echo $item['titulo']; ?></h4></a>
+						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><h4 class="d-none d-lg-block"><?php echo $item['titulo']; ?></h4></a>
 
 						<p class="my-2 my-lg-5"><?php echo $item['descripcion']; ?></p>
 
-						<a href="<?php echo $item['ruta'] ?>" class="float-right">Leer Más</a>
+						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>" class="float-right">Leer Más</a>
 
 						<div class="fecha"><?php echo $item['fecha']; ?></div>
 
@@ -48,10 +48,29 @@
 				<hr class="mb-4 mb-lg-5" style="border: 1px solid #79FF39">
 				<?php endforeach?>
 
+				<!-- TODO:Paginación -->
 				<div class="container d-none d-md-block">
+					<?php if ($articulos[0]['id'] != 'Error: vacío'): ?>
+					<ul class="pagination justify-content-center">
 
-					<ul class="pagination justify-content-center"></ul>
+						<?php if ($dts_pg['seccion_actual'] != 1): ?>
+						<li class="page-item first "><a href="<?php echo $blog['dominio'] . $catg; ?>/1" class="page-link">Primero</a></li>
+						<?php endif?>
 
+						<li class="page-item prev <?php echo ($dts_pg['pagina_actual'] == 1) ? 'disabled' : ''; ?>"><a href="<?php echo $blog['dominio'] . $catg . '/' . ($dts_pg['pagina_actual'] - 1); ?>" class="page-link"><i class="fas fa-angle-left"></i></a></li>
+
+							<?php for ($i = $dts_pg['inicio_seccion']; $i <= $dts_pg['total_paginas']; $i++): ?>
+						<li class="page-item <?php echo ($i == $dts_pg['pagina_actual']) ? 'active' : ''; ?>"><a href="<?php echo $blog['dominio'] . $catg . '/' . $i; ?>" class="page-link"><?php echo $i; ?></a></li>
+							<?php endfor?>
+
+						<li class="page-item next <?php echo ($dts_pg['pagina_actual'] == $dts_pg['total_paginas']) ? 'disabled' : ''; ?>"><a href="<?php echo $blog['dominio'] . $catg . '/' . ($dts_pg['pagina_actual'] + 1); ?>" class="page-link"><i class="fas fa-angle-right"></i></a></li>
+
+						<?php if ($dts_pg['seccion_actual'] != $dts_pg['total_seccion']): ?>
+						<li class="page-item first "><a href="<?php echo $blog['dominio'] . $catg . '/' . $dts_pg['total_paginas'] ?>" class="page-link">Último</a></li>
+						<?php endif?>
+
+					</ul>
+						<?php endif?>
 				</div>
 
 			</div>
@@ -66,29 +85,9 @@
 
 					<h4>Etiquetas</h4>
 
-
-						<a href="#suramerica" class="btn btn-secondary btn-sm m-1">suramerica</a>
-
-						<a href="#colombia" class="btn btn-secondary btn-sm m-1">colombia</a>
-
-						<a href="#peru" class="btn btn-secondary btn-sm m-1">peru</a>
-
-						<a href="#argentina" class="btn btn-secondary btn-sm m-1">argentina</a>
-
-						<a href="#chile" class="btn btn-secondary btn-sm m-1">chile</a>
-
-						<a href="#brasil" class="btn btn-secondary btn-sm m-1">brasil</a>
-
-						<a href="#ecuador" class="btn btn-secondary btn-sm m-1">ecuador</a>
-
-						<a href="#venezuela" class="btn btn-secondary btn-sm m-1">venezuela</a>
-
-						<a href="#paraguay" class="btn btn-secondary btn-sm m-1">paraguay</a>
-
-						<a href="#uruguay" class="btn btn-secondary btn-sm m-1">uruguay</a>
-
-						<a href="#bolivia" class="btn btn-secondary btn-sm m-1">bolivia</a>
-
+						<?php foreach (json_decode($articulos[0]['palabras_claves_cat'], true) as $data => $etiquetas): ?>
+						<a href="#<?php echo $etiquetas; ?>" class="btn btn-secondary btn-sm m-1"><?php echo $etiquetas; ?></a>
+						<?php endforeach?>
 				</div>
 
 				<!-- Artículos Destacados -->

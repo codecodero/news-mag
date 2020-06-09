@@ -17,11 +17,10 @@ class BlogControler
         return $categorias;
     }
 
-    #public static function MostrarArticulos($cantidad_art)
-    #{
-    #    $articulo = "articulo";
-    #    $categoria = "categoria";
-    #    $articulos = BlogModelo::MostrarArticulos($articulo, $categoria, $cantidad_art);
-    #    return $articulos;
-    #}
+    public static function BuscarArticuloRuta($art_ruta)
+    {
+
+        $articulo = BlogModelo::BuscarArticuloRuta($art_ruta);
+        return $articulo;
+    }
 }
