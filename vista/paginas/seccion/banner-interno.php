@@ -1,6 +1,4 @@
-<?php include 'seccion/banner-interno.php';?>
-
-<div class="bannerEstatico d-none d-md-block"></div>
+<!-- <div class="bannerEstatico d-none d-md-block" style="height: 0px" ></div> -->
 
 <section class="jd-slider fade-slider">
 
@@ -39,4 +37,3 @@
 	</div>
 
 </section>
-<?php include 'seccion/contenido-categoria.php';?>

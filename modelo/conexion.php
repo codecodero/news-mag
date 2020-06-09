@@ -10,22 +10,22 @@ class Conexion
     private $user;
     private $contrasena;
 
-    public function __construct($bd_config)
+    public function __construct()
     {
         # code...
-        $this->driver     = $bd_config['driver'];
-        $this->host       = $bd_config["host"];
-        $this->bd         = $bd_config["bd"];
-        $this->user       = $bd_config["usuario"];
-        $this->contrasena = $bd_config['contrasena'];
+        $this->driver = "mysql:";
+        $this->host = "host=localhost;";
+        $this->bd = "dbname=news_mag";
+        $this->user = "root";
+        $this->contrasena = "";
     }
 
     public function Conectar()
     {
         try {
-            
-            $con = new PDO($this->driver.$this->host.$this->bd, $this->user, $this->contrasena);
-            
+
+            $con = new PDO($this->driver . $this->host . $this->bd, $this->user, $this->contrasena);
+
         } catch (PDOException $e) {
 
             echo "Error en: " . $e->getMessage();

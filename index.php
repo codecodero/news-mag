@@ -1,4 +1,10 @@
 <?php
-require_once "modelo/plantillaModelo.php";
+require_once 'modelo/blogModelo.php';
+require_once 'modelo/paginacionModelo.php';
+require_once 'controler/blogControler.php';
+require_once 'controler/paginacionControler.php';
+
 require_once "controler/plantillaControler.php";
-require_once "vista/plantilla.php";
+
+$plantillaControl = new PlantillaControler();
+$plantillaControl->urls();
