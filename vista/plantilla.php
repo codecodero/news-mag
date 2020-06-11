@@ -36,7 +36,7 @@ if (isset($ruta[0])) {
         $p_claves_article .= $item . ", ";
     }
     ?>
-
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda mollitia, beatae distinctio quas earum praesentium fuga ut dicta sequi! Officiis, vel atque cumque beatae minima aut perferendis assumenda id repellendus?
     <title><?php echo $article['titulo']; ?></title>
     <meta name="title" content="<?php echo $article['titulo']; ?>">
 

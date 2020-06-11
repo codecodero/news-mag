@@ -1,0 +1,47 @@
+//  TODO: configuración solo para (VISUAL STUDIO CODE con theme FUTURE FUNK)
+{
+    "php.validate.executablePath": "/opt/lampp/bin/php-7.4.6",
+    "phpfmt.php_bin": "/opt/lampp/bin/php-7.4.6",
+    "workbench.iconTheme": "vscode-icons-mac",
+    "editor.fontFamily": "'Fira Code', 'Source Code Pro', monospace, 'Droid Sans Fallback'",
+    "editor.lineHeight": 24,
+    "editor.fontSize": 14,
+    "window.zoomLevel": 0.5,
+    "editor.wordWrap": "on",
+    "editor.fontLigatures": true,
+    "editor.formatOnSave": true,
+    "window.menuBarVisibility": "toggle",
+    "files.autoSave": "onFocusChange",
+    "workbench.colorTheme": "Future_Funk",
+    "editor.tokenColorCustomizations": {
+        "comments": "#5C6773"
+    },
+    "workbench.colorCustomizations": {
+        "editor.background": "#1F2430",
+        "activityBar.background": "#1F2430",
+        "sideBar.background": "#1F2430",
+        "activityBarBadge.background": "#FEBE5A",
+        "activityBarBadge.foreground": "#1F2430",
+        "sideBarSectionHeader.background": "#1F2430",
+        "editorGroup.dropBackground": "#1F2430",
+        "editorGroupHeader.tabsBackground": "#1F2430",
+        "editorGroup.emptyBackground": "#1F2430",
+        "tab.unfocusedActiveBackground": "#1F2430",
+        "tab.activeBorder": "#FEBE5A",
+        "tab.inactiveBackground": "#1F2430",
+        "settings.headerForeground": "#FEBE5A",
+        "settings.dropdownBackground": "#191E2A",
+        "settings.checkboxBackground": "#191E2A",
+        "extensionButton.prominentForeground": "#000000",
+        "extensionButton.prominentBackground": "#FEBE5A",
+        "statusBar.background": "#1F2430",
+        "scrollbarSlider.background": "#363D4B",
+        "scrollbarSlider.hoverBackground": "#363D4B",
+        "scrollbarSlider.activeBackground": "#363D4B",
+        "input.background": "#363D4B",
+        "dropdown.background": "#191E2A",
+        "button.background": "#FEBE5A",
+        "button.foreground": "#000000",
+        "editor.lineHighlightBackground": "#1F2430"
+    }
+}
