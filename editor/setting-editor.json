@@ -15,6 +15,7 @@
     "workbench.colorTheme": "Future_Funk",
     "terminal.integrated.fontWeightBold": "normal",
     "terminal.integrated.cursorStyle": "line",
+    "breadcrumbs.enabled": false,
     "editor.tokenColorCustomizations": {
         "comments": "#5C6773"
     },
