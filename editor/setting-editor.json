@@ -13,6 +13,8 @@
     "window.menuBarVisibility": "toggle",
     "files.autoSave": "onFocusChange",
     "workbench.colorTheme": "Future_Funk",
+    "terminal.integrated.fontWeightBold": "normal",
+    "terminal.integrated.cursorStyle": "line",
     "editor.tokenColorCustomizations": {
         "comments": "#5C6773"
     },
