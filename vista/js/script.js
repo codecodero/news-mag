@@ -9,40 +9,40 @@ $(".fade-slider").jdSlider({
 	isAuto: true,
 	isLoop: true,
 	isDrag: false,
-	interval:5000,
+	interval: 5000,
 	isCursor: false,
-	speed:3000
+	speed: 3000
 
 });
 
 var alturaBanner = $(".fade-slider").height();
 
-$(".bannerEstatico").css({"height":alturaBanner+"px"})
+$(".bannerEstatico").css({ "height": alturaBanner + "px" })
 
 
 /*=============================================
 ANIMACIONES SCROLL
 =============================================*/
 
-$(window).scroll(function(){
+$(window).scroll(function () {
 
 	var posY = window.pageYOffset;
-	
-	if(posY > alturaBanner){
 
-		$("header").css({"background":"white"})
+	if (posY > alturaBanner) {
 
-		$("header .logotipo").css({"filter":"invert(100%)"})
+		$("header").css({ "background": "white" })
 
-		$(".fa-search, .fa-bars").css({"color":"black"})
+		$("header .logotipo").css({ "filter": "invert(100%)" })
 
-	}else{
+		$(".fa-search, .fa-bars").css({ "color": "black" })
 
-		$("header").css({"background":"rgba(0,0,0,.5)"})
+	} else {
 
-		$("header .logotipo").css({"filter":"invert(0%)"})
+		$("header").css({ "background": "rgba(0,0,0,.5)" })
 
-		$(".fa-search, .fa-bars").css({"color":"white"})
+		$("header .logotipo").css({ "filter": "invert(0%)" })
+
+		$(".fa-search, .fa-bars").css({ "color": "white" })
 
 	}
 
@@ -52,13 +52,13 @@ $(window).scroll(function(){
 MENÚ
 =============================================*/
 
-$(".fa-bars").click(function(){
+$(".fa-bars").click(function () {
 
 	$(".menu").fadeIn("fast");
 
 })
 
-$(".btnClose").click(function(e){
+$(".btnClose").click(function (e) {
 
 	e.preventDefault();
 
@@ -70,19 +70,19 @@ $(".btnClose").click(function(e){
 GRID CATEGORÍAS
 =============================================*/
 
-$(".grid figure, .gridFooter figure").mouseover(function(){
+$(".grid figure, .gridFooter figure").mouseover(function () {
 
-	$(this).css({"background-position":"right bottom"})
-
-})
-
-$(".grid figure, .gridFooter figure").mouseout(function(){
-
-	$(this).css({"background-position":"left top"})
+	$(this).css({ "background-position": "right bottom" })
 
 })
 
-$(".grid figure, .gridFooter figure").click(function(){
+$(".grid figure, .gridFooter figure").mouseout(function () {
+
+	$(this).css({ "background-position": "left top" })
+
+})
+
+$(".grid figure, .gridFooter figure").click(function () {
 
 	var vinculo = $(this).attr("vinculo");
 
@@ -110,7 +110,7 @@ SCROLL UP
 =============================================*/
 
 $.scrollUp({
-	scrollText:"",
+	scrollText: "",
 	scrollSpeed: 2000,
 	easingType: "easeOutQuint"
 })
@@ -123,17 +123,40 @@ DESLIZADOR DE ARTÍCULOS
 $(".deslizadorArticulos").jdSlider({
 	wrap: ".slide-inner",
 	slideShow: 3,
-	slideToScroll:3,
+	slideToScroll: 3,
 	isLoop: true,
 	responsive: [{
 		viewSize: 320,
-		settings:{
+		settings: {
 			slideShow: 1,
 			slideToScroll: 1
 		}
 
 	}]
 
-})
+});
+
+// subir foto opinion
+$("#foto_comment").change(function (e) {
+	$(".alert").remove();
+	let imagen = this.files[0];
+	if (imagen["type"] != "image/jpeg" && imagen["type"] != "image/png") {
+		$("#foto_comment").val("");
+		$("#foto_comment").after("<div class='alert alert-warning' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><strong>No es Imagen!</strong> Archivo no admitido</div>");
+		e.preventDefault();
+
+	} else if (imagen['size'] > 2000000) {
+		$("#foto_comment").val("");
+		$("#foto_comment").after("<div class='alert alert-warning' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><strong>Imagen Pesado!</strong> Imagen demaciado pesado. Max 2MB</div>");
+		e.preventDefault();
+	} else {
+		let data_image = new FileReader;
+		data_image.readAsDataURL(imagen);
+		$(data_image).on("load", function (event) {
+			let ruta_img = event.target.result;
+			$(".img_comment").attr("src", ruta_img);
+		});
+	}
+});
 
 

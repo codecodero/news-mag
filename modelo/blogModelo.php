@@ -38,4 +38,38 @@ class BlogModelo
         $stm->close();
         $stm->null;
     }
+    public static function MostrarOpiones($id_article)
+    {
+        $con = new Conexion();
+        $sql = "SELECT comentarios.*,admin.* FROM comentarios INNER JOIN admin ON comentarios.id_admin=admin.id WHERE comentarios.id_articulo=:id_art";
+        $smt = $con->Conectar()->prepare($sql);
+        $smt->bindParam(":id_art", $id_article, PDO::PARAM_STR);
+        $smt->execute();
+        return $smt->fetchAll();
+        $stm->close();
+        $stm->null;
+    }
+    public static function GuardarComentario($name, $email, $id_article, $comment, $img_user)
+    {
+        try {
+            //code...
+            $con = new Conexion();
+            $sql = "INSERT INTO comentarios (nombre_usuario,correo_usuario,img_usuario,comentario,id_articulo) VALUES (:nombre,:correo,:img,:comment,:id_art)";
+            $smt = $con->Conectar()->prepare($sql);
+            $smt->execute(array(
+                ":nombre" => $name,
+                ":correo" => $email,
+                ":img" => $img_user,
+                ":comment" => $comment,
+                ":id_art" => $id_article,
+
+            ));
+            return 1;
+        } catch (Exeption $e) {
+
+            return "Error en: " . $e->getMessage();
+        }
+        $stm->close();
+        $stm->null;
+    }
 }

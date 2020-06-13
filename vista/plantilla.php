@@ -36,7 +36,6 @@ if (isset($ruta[0])) {
         $p_claves_article .= $item . ", ";
     }
     ?>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda mollitia, beatae distinctio quas earum praesentium fuga ut dicta sequi! Officiis, vel atque cumque beatae minima aut perferendis assumenda id repellendus?
     <title><?php echo $article['titulo']; ?></title>
     <meta name="title" content="<?php echo $article['titulo']; ?>">
 
@@ -89,12 +88,14 @@ if (isset($ruta[0])) {
 	<link href="https://fonts.googleapis.com/css?family=Chewy|Open+Sans:300,400" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
 	<link rel="stylesheet" href="<?php echo $blog['dominio']; ?>vista/css/plugins/jquery.jdSlider.css">
-	<link rel="stylesheet" href="<?php echo $blog['dominio']; ?>vista/css/style.css">
+    <link rel="stylesheet" href="<?php echo $blog['dominio']; ?>vista/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	<script src="<?php echo $blog['dominio']; ?>vista/js/plugins/jquery.jdSlider-latest.js"></script>
-	<!-- <script src="<?php echo $blog['dominio']; ?>vista/js/plugins/pagination.min.js"></script> -->
+    <!-- <script src="<?php echo $blog['dominio']; ?>vista/js/plugins/pagination.min.js"></script> -->
+    <script src="https://unpkg.com/notie"></script>
 	<script src="<?php echo $blog['dominio']; ?>vista/js/plugins/scrollUP.js"></script>
 	<script src="<?php echo $blog['dominio']; ?>vista/js/plugins/jquery.easing.js"></script>
 </head>
