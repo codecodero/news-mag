@@ -84,82 +84,26 @@
 				<div class="my-4">
 
 					<h4>Artículos Destacados</h4>
-
+<?php
+PaginacionControl::config(1, 4, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.fecha,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria", 4);
+$feacture_article = PaginacionControl::MostrarFilas("vista", "DESC");
+?>
+					<?php foreach ($feacture_article as $feartures => $feacture_articles): ?>
 					<div class="d-flex my-3">
-
 						<div class="w-100 w-xl-50 pr-3 pt-2">
-
-							<a href="articulos.html">
-
-								<img src="<?php echo $blog['dominio']; ?>vista/img/articulo10.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
-
+							<a href="<?php echo $blog['dominio'] . $feacture_articles['ruta']; ?>">
+								<img src="<?php echo $blog['dominio'] . $feacture_articles['img']; ?>" alt="<?php echo $feacture_articles['titulo']; ?>" class="img-fluid">
 							</a>
-
 						</div>
-
 						<div>
-
-							<a href="articulos.html" class="text-secondary">
-
-								<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
+							<a href="<?php echo $blog['dominio'] . $feacture_articles['ruta']; ?>" class="text-secondary">
+								<p class="small"><?php echo $feacture_articles['titulo']; ?></p>
 							</a>
-
 						</div>
-
 					</div>
-
-					<div class="d-flex my-3">
-
-						<div class="w-100 w-xl-50 pr-3 pt-2">
-
-							<a href="articulos.html">
-
-								<img src="<?php echo $blog['dominio']; ?>vista/img/articulo09.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
-
-							</a>
-
-						</div>
-
-						<div>
-
-							<a href="articulos.html" class="text-secondary">
-
-								<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-							</a>
-
-						</div>
-
-					</div>
-
-					<div class="d-flex my-3">
-
-						<div class="w-100 w-xl-50 pr-3 pt-2">
-
-							<a href="articulos.html">
-
-								<img src="<?php echo $blog['dominio']; ?>vista/img/articulo08.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
-
-							</a>
-
-						</div>
-
-						<div>
-
-							<a href="articulos.html" class="text-secondary">
-
-								<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-							</a>
-
-						</div>
-
-					</div>
-
+					<?php endforeach?>
 
 				</div>
-
 				<!-- PUBLICIDAD -->
 
 				<div class="my-4">

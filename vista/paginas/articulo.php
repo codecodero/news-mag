@@ -1,5 +1,7 @@
+<?php
+BlogControler::ActualizarCantidadVistas($articulo['id'], $articulo['vista']);
+?>
 <div class="bannerEstatico d-none d-md-block"></div>
-
 <section class="jd-slider fade-slider">
 
 	<div class="slide-inner">
@@ -147,10 +149,8 @@
 
 						<div class="slide-inner">
 <?php
-$pagina = 1;
-$postXpagina = 5;
 $id_cat_art = $articulo['id_categoria'];
-PaginacionControl::config($pagina, $postXpagina, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.fecha,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria WHERE a.id_categoria='$id_cat_art'", 5);
+PaginacionControl::config(1, 6, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.fecha,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria WHERE a.id_categoria='$id_cat_art'", 6);
 $articles_data = PaginacionControl::MostrarFilas("id", "DESC");
 ?>
 							<ul class="slide-area">
@@ -277,80 +277,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			<!-- COLUMNA DERECHA -->
 			<div class="d-none d-md-block pt-md-4 pt-lg-0 col-md-4 col-lg-3">
 				<!-- ARTÍCULOS RECIENTES -->
+				<?php
+PaginacionControl::config(1, 4, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.fecha,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria", 4);
+$articles_recientes = PaginacionControl::MostrarFilas("id", "DESC");
+?>
 				<div class="my-4">
 					<h4>Artículos Recientes</h4>
+					<?php foreach ($articles_recientes as $article_recents => $article_recent): ?>
 					<div class="d-flex my-3">
 						<div class="w-100 w-xl-50 pr-3 pt-2">
-							<a href="articulos.html">
-								<img src="<?php echo $blog['dominio']; ?>vista/img/articulo05.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
-
+							<a href="<?php echo $blog['dominio'] . $article_recent['ruta']; ?>">
+								<img src="<?php echo $blog['dominio'] . $article_recent['img']; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid">
 							</a>
-
 						</div>
-
 						<div>
-
-							<a href="articulos.html" class="text-secondary">
-
-								<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
+							<a href="<?php echo $blog['dominio'] . $article_recent['ruta']; ?>" class="text-secondary">
+								<p class="small"><?php echo substr($article_recent['descripcion'], 0, 50) . "..."; ?></p>
 							</a>
-
 						</div>
-
 					</div>
-
-					<div class="d-flex my-3">
-
-						<div class="w-100 w-xl-50 pr-3 pt-2">
-
-							<a href="articulos.html">
-
-								<img src="<?php echo $blog['dominio']; ?>vista/img/articulo06.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
-
-							</a>
-
-						</div>
-
-						<div>
-
-							<a href="articulos.html" class="text-secondary">
-
-								<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-							</a>
-
-						</div>
-
-					</div>
-
-					<div class="d-flex my-3">
-
-						<div class="w-100 w-xl-50 pr-3 pt-2">
-
-							<a href="articulos.html">
-
-								<img src="<?php echo $blog['dominio']; ?>vista/img/articulo07.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
-
-							</a>
-
-						</div>
-
-						<div>
-
-							<a href="articulos.html" class="text-secondary">
-
-								<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-							</a>
-
-						</div>
-
-					</div>
-
-
+					<?php endforeach?>
 				</div>
-
 				<!-- PUBLICIDAD -->
 
 				<div class="mb-4">

@@ -47,23 +47,14 @@
 			<!-- ENTRADA DEL BUSCADOR -->
 
 			<div id="buscador" class="collapse col-12">
-
-				<div class="input-group float-right w-50 pl-xl-5 pb-3">
-
-					<input type="text" class="form-control" placeholder="Buscar">
-
-					<div class="input-group-append">
-
-						<span class="input-group-text bg-primary border-0" style="cursor:pointer">
-
-							<i class="fas fa-search"></i>
-
-						</span>
-
+					<div class="input-group float-right w-50 pl-xl-5 pb-3">
+						<input type="text" class="form-control" placeholder="Buscar" name="search" id="search">
+						<div class="input-group-append">
+							<button id="btn_search" class="input-group-text bg-primary border-0" style="cursor:pointer">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
 					</div>
-
-				</div>
-
 			</div>
 
 		</div>

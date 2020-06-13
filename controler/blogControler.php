@@ -28,6 +28,12 @@ class BlogControler
         $comments = BlogModelo::MostrarOpiones($id_article);
         return $comments;
     }
+    public static function ActualizarCantidadVistas($id_article, $vista)
+    {
+        $vista_add = $vista + 1;
+        $respuesta = BlogModelo::ActualizarCantidadVistas($id_article, $vista_add);
+        return $respuesta;
+    }
     public static function GuardarComentario()
     {
         if (isset($_POST['nombre_comment']) && isset($_POST['correo_comment']) && isset($_POST['comment']) && isset($_POST['id_article'])) {

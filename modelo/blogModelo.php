@@ -52,7 +52,6 @@ class BlogModelo
     public static function GuardarComentario($name, $email, $id_article, $comment, $img_user)
     {
         try {
-            //code...
             $con = new Conexion();
             $sql = "INSERT INTO comentarios (nombre_usuario,correo_usuario,img_usuario,comentario,id_articulo) VALUES (:nombre,:correo,:img,:comment,:id_art)";
             $smt = $con->Conectar()->prepare($sql);
@@ -65,11 +64,29 @@ class BlogModelo
 
             ));
             return 1;
+            $stm->close();
+            $stm->null;
         } catch (Exeption $e) {
 
             return "Error en: " . $e->getMessage();
         }
-        $stm->close();
-        $stm->null;
+
+    }
+    public static function ActualizarCantidadVistas($id_article, $vista)
+    {
+        try {
+            $con = new Conexion();
+            $sql = "UPDATE articulo SET vista=:vistas WHERE id=:id_art";
+            $stm = $con->Conectar()->prepare($sql);
+            $stm->execute(array(
+                ":vistas" => $vista,
+                ":id_art" => $id_article,
+            ));
+            return 1;
+            $stm->close();
+            $stm->null;
+        } catch (Exeption $e) {
+            return "Error en: " . $e->getMessage();
+        }
     }
 }

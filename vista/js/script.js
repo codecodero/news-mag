@@ -158,5 +158,33 @@ $("#foto_comment").change(function (e) {
 		});
 	}
 });
+let url_host = "http://localhost/news-mag/";
+$("#btn_search").click(function (e) {
+	search_form(e);
+});
+let search_form = function (e) {
+	let text_search = $("#search").val().toLowerCase();
+	let expresion = /^[0-9a-zñÑáéíóú ]*$/;
+	if (!expresion.test(text_search)) {
+		$("#search").val("");
+		e.preventDefault();
+	} else {
+		let evaluarBusqueda = text_search.replace(/[ñáéíóú ]/g, "_");
+
+		if ($("#search").val() != "") {
+			window.location = url_host + evaluarBusqueda;
+		} else {
+			alert("Ingrese para buscar");
+			e.preventDefault();
+		}
+	}
+}
+
+$(document).on("keyup", "#search", function (e) {
+	if (e.keyCode == 13 && $("#search").val() != "") {
+		search_form(e);
+	}
+	e.preventDefault();
+});
 
 
