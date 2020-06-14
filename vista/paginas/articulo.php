@@ -130,7 +130,7 @@ BlogControler::ActualizarCantidadVistas($articulo['id'], $articulo['vista']);
 					<div>
 						<h4>Etiquetas</h4>
 						<?php foreach (json_decode($articulo['palabras_claves'], true) as $key => $value): ?>
-							<a href="#<?php echo $value; ?>" class="btn btn-secondary btn-sm m-1"><?php echo $value; ?></a>
+							<a href="<?php echo $blog['dominio'] . "search/" . strtolower(preg_replace('/[0-9ñáéíóú ]/', '_', $value)); ?>" class="btn btn-secondary btn-sm m-1"><?php echo $value; ?></a>
 						<?php endforeach?>
 
 					</div>
@@ -299,24 +299,12 @@ $articles_recientes = PaginacionControl::MostrarFilas("id", "DESC");
 					<?php endforeach?>
 				</div>
 				<!-- PUBLICIDAD -->
-
-				<div class="mb-4">
-
-					<img src="<?php echo $blog['dominio']; ?>vista/img/ad03.png" class="img-fluid">
-
-				</div>
-
-				<div class="my-4">
-
-					<img src="<?php echo $blog['dominio']; ?>vista/img/ad02.jpg" class="img-fluid">
-
-				</div>
-
-				<div class="my-4">
-
-					<img src="<?php echo $blog['dominio']; ?>vista/img/ad06.png" class="img-fluid">
-
-				</div>
+				<?php
+$data_ads = BlogControler::MostrarAds("articulo");
+foreach ($data_ads as $ads => $ad) {
+    echo $ad['codigo_anuncio'];
+}
+?>
 
 			</div>
 

@@ -172,7 +172,7 @@ let search_form = function (e) {
 		let evaluarBusqueda = text_search.replace(/[ñáéíóú ]/g, "_");
 
 		if ($("#search").val() != "") {
-			window.location = url_host + evaluarBusqueda;
+			window.location = url_host + "search/" + evaluarBusqueda;
 		} else {
 			alert("Ingrese para buscar");
 			e.preventDefault();
@@ -186,5 +186,3 @@ $(document).on("keyup", "#search", function (e) {
 	}
 	e.preventDefault();
 });
-
-

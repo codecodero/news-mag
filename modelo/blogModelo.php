@@ -89,4 +89,37 @@ class BlogModelo
             return "Error en: " . $e->getMessage();
         }
     }
+    public static function MostrarAds($pagina)
+    {
+        try {
+
+            $con = new Conexion();
+            $sql = "SELECT * FROM ads where pagina_anuncio=:pag";
+            $stm = $con->Conectar()->prepare($sql);
+            $stm->execute(array(
+                ":pag" => $pagina,
+            ));
+            return $stm->fetchAll();
+            $stm->close();
+            $stm->null;
+        } catch (Exception $e) {
+            return "Error en:" . $e->getMessage();
+        }
+    }
+    public static function MostrarBanner($pagina)
+    {
+        try {
+            $con = new Conexion();
+            $sql = "SELECT * FROM banner WHERE pagina_banner=:pag";
+            $stm = $con->Conectar()->prepare($sql);
+            $stm->execute(array(
+                ":pag" => $pagina,
+            ));
+            return $stm->fetchAll();
+            $stm->close();
+            $stm->null;
+        } catch (Exeption $e) {
+            return "Error en: " . $e->getMessage();
+        }
+    }
 }

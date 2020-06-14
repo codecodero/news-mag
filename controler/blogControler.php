@@ -34,6 +34,16 @@ class BlogControler
         $respuesta = BlogModelo::ActualizarCantidadVistas($id_article, $vista_add);
         return $respuesta;
     }
+    public static function MostrarAds($pagina)
+    {
+        $ads = BlogModelo::MostrarAds($pagina);
+        return $ads;
+    }
+    public static function MostrarBanner($pagina)
+    {
+        $banners = BlogModelo::MostrarBanner($pagina);
+        return $banners;
+    }
     public static function GuardarComentario()
     {
         if (isset($_POST['nombre_comment']) && isset($_POST['correo_comment']) && isset($_POST['comment']) && isset($_POST['id_article'])) {

@@ -1,31 +1,16 @@
 <div class="bannerEstatico d-none d-md-block"></div>
+<?php
+$banners = BlogControler::MostrarBanner("inicio");
+?>
 
 <section class="jd-slider fade-slider">
 
 	<div class="slide-inner">
 
 		<ul class="slide-area">
-
-			<li><img src="<?php echo $blog['dominio']; ?>vista/img/banner01.jpg" class="img-fluid"></li>
-
-			<li>
-
-				<img src="<?php echo $blog['dominio']; ?>vista/img/banner02.jpg" class="img-fluid">
-
-			</li>
-
-			<li>
-
-				<img src="<?php echo $blog['dominio']; ?>vista/img/banner03.jpg" class="img-fluid">
-
-			</li>
-
-			<li>
-
-				<img src="<?php echo $blog['dominio']; ?>vista/img/banner04.jpg" class="img-fluid">
-
-			</li>
-
+		<?php foreach ($banners as $banrs => $banner): ?>
+			<li><img src="<?php echo $blog['dominio'] . $banner['img_banner']; ?>" class="img-fluid"></li>
+		<?php endforeach?>
 		</ul>
 
 	</div>

@@ -133,6 +133,22 @@ if (isset($ruta[0])) {
             $articulo = BlogControler::BuscarArticuloRuta($ruta[0]);
             include "paginas/articulo.php";
 
+        } else if ($ruta[0] == "search") {
+            $pagina = (isset($ruta[2])) ? (int) $ruta[2] : 1;
+            $postXpagina = 5;
+            $buscar = $ruta[1];
+            PaginacionControl::config($pagina, $postXpagina, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,c.ruta,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.fecha,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria WHERE a.descripcion LIKE '%$buscar%' OR a.titulo LIKE '%$buscar%' OR a.contenido LIKE '%$buscar%'", 5);
+            $dts_pg = PaginacionControl::data();
+            if ($dts_pg['error']) {
+                include 'paginas/error404.php';
+            } else {
+                $articulos = PaginacionControl::MostrarFilas("id", "DESC");
+                include "paginas/buscador.php";
+            }
+
+        } else if ($ruta[0] == "sobre-mi") {
+            include "paginas/sobre-mi.php";
+
         } else if ($rutaok == "categorias") {
 
             $catg = $ruta[0];

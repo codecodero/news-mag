@@ -61,7 +61,9 @@ header .logotipo{
 .redes ul li i.fa-snapchat-ghost{
 	background: #FF9052;
 }
-
+.redes ul li i.fa-spotify{
+	background: #1ED760;
+}
 .fa-bars{
 	font-size:35px;
 }

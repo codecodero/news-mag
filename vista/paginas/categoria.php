@@ -1,7 +1,5 @@
 <?php include 'seccion/banner-interno.php';?>
 
-<div class="bannerEstatico d-none d-md-block"></div>
-
 <section class="jd-slider fade-slider">
 
 	<div class="slide-inner">

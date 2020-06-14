@@ -86,7 +86,7 @@
 					<h4>Etiquetas</h4>
 
 						<?php foreach (json_decode($articulos[0]['palabras_claves_cat'], true) as $data => $etiquetas): ?>
-						<a href="#<?php echo $etiquetas; ?>" class="btn btn-secondary btn-sm m-1"><?php echo $etiquetas; ?></a>
+						<a href="<?php echo $blog['dominio'] . "search/" . strtolower(preg_replace('/[0-9ñáéíóú ]/', '_', $etiquetas)); ?>" class="btn btn-secondary btn-sm m-1"><?php echo $etiquetas; ?></a>
 						<?php endforeach?>
 				</div>
 
@@ -131,24 +131,12 @@ $feacture_articles = PaginacionControl::MostrarFilas("vista", "DESC");
 				</div>
 
 				<!-- PUBLICIDAD -->
-
-				<div class="mb-4">
-
-					<img src="<?php echo $blog['dominio']; ?>vista/img/ad03.png" class="img-fluid">
-
-				</div>
-
-				<div class="my-4">
-
-					<img src="<?php echo $blog['dominio']; ?>vista/img/ad02.jpg" class="img-fluid">
-
-				</div>
-
-				<div class="my-4">
-
-					<img src="<?php echo $blog['dominio']; ?>vista/img/ad05.png" class="img-fluid">
-
-				</div>
+				<?php
+$data_ads = BlogControler::MostrarAds("categorias");
+foreach ($data_ads as $ads => $ad) {
+    echo $ad['codigo_anuncio'];
+}
+?>
 
 			</div>
 

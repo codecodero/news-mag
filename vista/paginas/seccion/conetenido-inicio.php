@@ -15,7 +15,7 @@
 
 						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><h5 class="d-block d-lg-none py-3"><?php echo $item['titulo']; ?></h5></a>
 
-						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><img src="<?php echo $item['img']; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
+						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><img src="<?php echo $blog['dominio'] . $item['img']; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
 
 					</div>
 
@@ -71,11 +71,11 @@
 
 				<div class="sobreMi">
 
-					<h4>Sobre Mi</h4>
+					<h4><a href="<?php echo $blog['dominio'] . "sobre-mi"; ?>" >Sobre Mi</a></h4>
 
-					<img src="<?php echo $blog['dominio']; ?>vista/img/sobreMi.jpg" alt="Lorem ipsum dolor sit amet" class="img-fluid my-1">
+					<img src="<?php echo $blog['dominio'] . $blog['img_sobre_mi']; ?>" alt="<?=$blog['img_sobre_mi'];?>" class="img-fluid my-1">
 
-					<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum odio, eos architecto atque numquam alias laboriosam minima beatae consectetur.</p>
+					<p class="small"><?php echo $blog['descripcion']; ?></p>
 
 				</div>
 
@@ -105,24 +105,12 @@ $feacture_article = PaginacionControl::MostrarFilas("vista", "DESC");
 
 				</div>
 				<!-- PUBLICIDAD -->
-
-				<div class="my-4">
-
-					<img src="<?php echo $blog['dominio']; ?>vista/img/ad01.jpg" class="img-fluid">
-
-				</div>
-
-				<div class="my-4">
-
-					<img src="<?php echo $blog['dominio']; ?>vista/img/ad02.jpg" class="img-fluid">
-
-				</div>
-
-				<div class="my-4">
-
-					<img src="<?php echo $blog['dominio']; ?>vista/img/ad05.png" class="img-fluid">
-
-				</div>
+<?php
+$data_ads = BlogControler::MostrarAds("inicio");
+foreach ($data_ads as $ads => $ad) {
+    echo $ad['codigo_anuncio'];
+}
+?>
 
 			</div>
 

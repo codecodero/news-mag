@@ -40,15 +40,26 @@
 
 			<div class="col-md-5 col-lg-5 col-xl-4 pt-5">
 				<h6 class="text-white">Inscríbete en nuestro newletter:</h6>
-				<div class="input-group my-4">
-					<input type="text" class="form-control" placeholder="Ingresa tu Email">
-					<div class="input-group-append">
-						<span class="input-group-text bg-dark text-white">Inscribirse</span>
+					<div id="mc_embed_signup">
+						<div class="mc-field-group">
+							<form action="https://tomorrowlandlatino.us4.list-manage.com/subscribe/post?u=9eb692b59d8609fca8d35cf7b&amp;id=ae2568ac5a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+								<div class="input-group my-4">
+									<input type="email" class="form-control required email" placeholder="Ingresa tu Email" id="mce-EMAIL" required>
+									<div class="input-group-append">
+										<span class="input-group-text bg-dark text-white">
+										<input type="submit" value="Suscribirse" name="subscribe" id="mc-embedded-subscribe" class="button btn btn-dark text-white btn-sm p-0 m-0">
+										</span>
+									</div>
+								</div>
+							</form>
+							<div id="mce-responses" class="clear">
+								<div class="response" id="mce-error-response" style="display:none"></div>
+								<div class="response" id="mce-success-response" style="display:none"></div>
+							</div>
+							<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_9eb692b59d8609fca8d35cf7b_ae2568ac5a" tabindex="-1" value=""></div>
+						</div>
 					</div>
-				</div>
-
 				<div class="p-0 w-100 pt-2">
-
 					<ul class="d-flex justify-content-left p-0">
 						<?php foreach (json_decode($blog['redes_sociales'], true) as $key => $value): ?>
 							<li>
