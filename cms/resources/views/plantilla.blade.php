@@ -1,15 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon" href="{{$blog[0]['cms'].$blog[0]['icono']}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{{ url('/') }}/plugins/fontawesome/css/all.min.css" />
-    <link rel="stylesheet" href="{{ url('/') }}/plugins/bootstrap/css/bootstrap-4.min.css" />
-    <link rel="stylesheet" href="{{url('/')}}/plugins/overlayscrollbars/css/overlayscrollbars.min.css">
+    <link rel="stylesheet" href="{{ url('/') }}/plugins/bootstrap/bootstrap-4.min.css" />
+    <link rel="stylesheet" href="{{url('/')}}/plugins/overlayscrollbars/overlayscrollbars.min.css">
+    <link rel="stylesheet" href="{{url('/')}}/plugins/tags/taginput.css">
+    <link rel="stylesheet" href="{{url('/')}}/plugins/summernote/summernote.css">
     <link rel="stylesheet" href="{{ url('/') }}/css/adminlte.min.css" />
+    <link rel="stylesheet" href="{{url('/')}}/plugins/notie/notie.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
+    
+    <script src="https://kit.fontawesome.com/e632f1f723.js" crossorigin="anonymous"></script>
+    <script src="{{url('/')}}/plugins/jquery/jquery.min.js"></script>
+    <script src="{{url('/')}}/plugins/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="{{url('/')}}/plugins/overlayscrollbars/overlayscrollbars.min.js"></script>
+    <script src="{{url('/')}}/plugins/tags/taginput.js"></script>
+    <script src="{{url('/')}}/plugins/summernote/summernote.js"></script>
+    <script src="{{url('/')}}/js/adminlte.min.js"></script>
+    <script src="{{url('/')}}/plugins/notie/notie.min.js"></script>
+    <script src="{{url('/')}}/js/dashboard.js"></script>
     <title>News Mag</title>
 </head>
 
@@ -19,12 +32,14 @@
         @include('modulos.sidebar')
         @yield('contenido')
         @include('modulos.footer')
-    </div>
-    
-<script src="{{url('/')}}/plugins/jquery/jquery.min.js"></script>
-<script src="{{url('/')}}/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="{{url('/')}}/plugins/overlayscrollbars/js/overlayscrollbars.min.js"></script>
-<script src="{{url('/')}}/js/adminlte.min.js"></script>
-</body>
+    </div>   
 
+    @if(isset($blog[0]['dominio']))
+        <script>
+            $(document).ready(function() {
+            $('.summernote').summernote();
+            });
+        </script>
+    @endif
+</body>
 </html>

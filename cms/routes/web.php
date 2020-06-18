@@ -34,11 +34,13 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/comentarios', 'ComentariosController@TraerComentarios');
 
 Route::view('/', 'paginas.inicio');
+Route::view('/inicio', 'paginas.inicio');
+
+Route::resource('/blog', 'BlogController');
 Route::resource('/admin', 'AdminController');
 Route::resource('/ads', 'AdsController');
 Route::resource('/articulos', 'ArticulosController');
 Route::resource('/banner', 'BannerController');
-Route::resource('/blog', 'BlogController');
 Route::resource('/categorias', 'CategoriasController');
 Route::resource('/comentarios', 'ComentariosController');
 
