@@ -46,7 +46,7 @@ if (isset($ruta[0])) {
     <meta property="og:title" content="<?php echo $article['titulo']; ?>">
     <meta property="og:description" content="<?php echo $article['descripcion']; ?>">
     <meta property="og:type" content="article">
-    <meta property="og:image" content="<?php echo $blog['dominio'] . $article['img']; ?>">
+    <meta property="og:image" content="<?php echo $blog['cms'] . $article['img']; ?>">
     <meta property="og:url" content="<?php echo $blog['dominio'] . $article['ruta']; ?>">
 
     <?php elseif (isset($url_cat) == "categorias"): ?>
@@ -60,7 +60,7 @@ if (isset($ruta[0])) {
     <meta property="og:title" content="<?php echo $blog['titulo'] . " | " . $value['categoria']; ?>">
     <meta property="og:description" content="<?php echo $value['descripcion']; ?>">
     <meta property="og:type" content="article">
-    <meta property="og:image" content="<?php echo $blog['dominio'] . $blog['portada']; ?>">
+    <meta property="og:image" content="<?php echo $blog['cms'] . $blog['portada']; ?>">
     <meta property="og:url" content="<?php echo $blog['dominio'] . $value['ruta']; ?>">
 
 	<?php endif?>
@@ -79,14 +79,13 @@ if (isset($ruta[0])) {
     <meta property="og:title" content="<?php echo $blog['titulo']; ?>">
     <meta property="og:description" content="<?php echo $blog['descripcion']; ?>">
     <meta property="og:type" content="site">
-    <meta property="og:image" content="<?php echo $blog['dominio'] . $blog['portada']; ?>">
+    <meta property="og:image" content="<?php echo $blog['cms'] . $blog['portada']; ?>">
     <meta property="og:url" content="<?php echo $blog['dominio']; ?>">
 
 <?php }?>
-	<link rel="icon" href="<?php echo $blog['dominio']; ?>vista/img/icono.jpg">
+	<link rel="icon" href="<?php echo $blog['cms'] . $blog['icono']; ?>">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Chewy|Open+Sans:300,400" rel="stylesheet">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
 	<link rel="stylesheet" href="<?php echo $blog['dominio']; ?>vista/css/plugins/jquery.jdSlider.css">
     <link rel="stylesheet" href="<?php echo $blog['dominio']; ?>vista/css/style.css">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
@@ -189,7 +188,7 @@ if (isset($ruta[0])) {
 include 'paginas/seccion/footer.php';
 
 ?>
-
+<script src="https://kit.fontawesome.com/e632f1f723.js" crossorigin="anonymous"></script>
 <script src="<?php echo $blog['dominio']; ?>vista/js/script.js"></script>
 </body>
 </html>

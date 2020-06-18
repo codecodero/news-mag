@@ -8,7 +8,7 @@
 
 				<a href="<?php echo $blog['dominio']; ?>">
 
-					<img src="<?php echo $blog['dominio'] . $blog['logo']; ?>" alt="Logo de Juanito Travel" class="img-fluid logotipo">
+					<img src="<?php echo $blog['cms'] . $blog['logo']; ?>" alt="Logo de Juanito Travel" class="img-fluid logotipo">
 
 				</a>
 
