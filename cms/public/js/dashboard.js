@@ -1,19 +1,40 @@
-$(document).ready(function () {
+$(document).ready(function() {
+    let url_host = document.location.origin;
+    $(".summernote").summernote({
+        callbacks: {
+            onImageUpload: function(files) {
+                for (let i = 0; i < files.length; i++) {
+                    SubirImagen(files[i]);
+                }
+            }
+        }
+    });
+    let SubirImagen = function(imagenes) {
+        let datos = new FormData();
+        datos.append('img', imagenes, imagenes.name);
+        datos.append('ruta', url_host);
+        $.ajax({
+            url: url_host + '/news-mag/cms/public/ajax/subir_img.php',
+            method: 'POST',
+            data: datos,
+            contentType: false,
+            cache: false,
+            processData: false,
+        }).done(function(respuesta) {
+            $(".summernote").summernote("insertImage", respuesta);
+            console.log("success");
+        }).fail(function(jqXHR, textStatus, errorThown) {
+            console.log("error" + errorThown);
+        }).always(function() {
+            console.log("complete");
+        });
+    };
     let redes_socials = JSON.parse($("#redes_sociales").val());
-    $(document).on("click", "#btn_add_red", function (e) {
+    $(document).on("click", "#btn_add_red", function(e) {
         let url = $("#link_red").val();
         let icono = $("#icono_redes").val();
-
         if (url != "" && icono != 0) {
-            $("#socials").append(
-                '<div class="input-group mb-3"><div class= "input-group-prepend" ><span class="input-group-text"><i class="' +
-                    icono +
-                    '"></i></span></div><input type="text" class="form-control" placeholder="" value="' +
-                    url +
-                    '"><div class="input-group-append"><span class="btn btn-danger eliminar_red" data-url="' +
-                    url +
-                    '">&times;</span></div></div>'
-            );
+            $("#socials").append('<div class="input-group mb-3"><div class= "input-group-prepend" ><span class="input-group-text"><i class="' + icono + '"></i></span></div><input type="text" class="form-control" placeholder="" value="' + url + '"><div class="input-group-append"><span class="btn btn-danger eliminar_red" data-url="' + url + '">&times;</span></div></div>');
             redes_socials.push({
                 url: url,
                 icono: icono,
@@ -30,7 +51,7 @@ $(document).ready(function () {
         }
         e.preventDefault();
     });
-    $(document).on("click", ".eliminar_red", function () {
+    $(document).on("click", ".eliminar_red", function() {
         let url_red = $(this).attr("data-url");
         for (let i = 0; i < redes_socials.length; i++) {
             if (url_red == redes_socials[i]["url"]) {
@@ -41,8 +62,7 @@ $(document).ready(function () {
             }
         }
     });
-
-    $("input[type='file']").change(function () {
+    $("input[type='file']").change(function() {
         let img = this.files[0];
         let nombreimg = $(this).attr("id");
         if (img["type"] != "image/jpeg" && img["type"] != "image/png") {
@@ -62,7 +82,7 @@ $(document).ready(function () {
         } else {
             let img_prev = new FileReader();
             img_prev.readAsDataURL(img);
-            $(img_prev).on("load", function (e) {
+            $(img_prev).on("load", function(e) {
                 let src_img = e.target.result;
                 $(".img_" + nombreimg).attr("src", src_img);
             });

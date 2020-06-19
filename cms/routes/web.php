@@ -33,8 +33,8 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/categorias', 'CategoriasController@TraerCategorias');
 // Route::get('/comentarios', 'ComentariosController@TraerComentarios');
 
-Route::view('/', 'paginas.inicio');
-Route::view('/inicio', 'paginas.inicio');
+Route::get('/', 'InicioController@index');
+Route::get('/inicio', 'InicioController@index');
 
 Route::resource('/blog', 'BlogController');
 Route::resource('/admin', 'AdminController');

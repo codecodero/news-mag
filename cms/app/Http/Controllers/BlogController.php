@@ -50,8 +50,8 @@ class BlogController extends Controller
                     "palabras_claves" => 'required|regex:/^[,\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
                     "redes_sociales" => 'required',
                     "info" => 'required|regex:/^[(\\)\\=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
-                ]
-            );
+
+                ]);
             if ($validar->fails()) {
                 return redirect("/blog")->with("error-validation", "");
             } else {
@@ -62,8 +62,8 @@ class BlogController extends Controller
                     if ($validacion_img_icono->fails()) {
                         return redirect('/blog')->with("img-error", "");
                     } else {
-                        if (file_exists($datos['icono_actual'])) { # code...
-                        unlink($datos['icono_actual']);
+                        if (file_exists($datos['icono_actual'])) {
+                            unlink($datos['icono_actual']);
                         }
                         $aletoria = mt_rand(1, 999);
                         $icono = "img/blog/icono" . $aletoria . "." . $imagenes['icono_tem']->guessExtension();
@@ -204,9 +204,14 @@ class BlogController extends Controller
 
                 }
 
+                // $origen = glob('img/temp/*');
+                // foreach ($origen as $file) {
+                //     copy($file, 'img/blog');
+                // }
+
                 $site = array(
-                    "icono" => $icono,
-                    "logo" => $logo,
+                    "icono" => $icono
+                    , "logo" => $logo,
                     "portada" => $portada,
                     "titulo" => $datos['titulo_sitio'],
                     "dominio" => $datos["dominio"],

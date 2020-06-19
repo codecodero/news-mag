@@ -142,7 +142,7 @@
                    <div class="form-group row">
                     <label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
                     <div class="col-sm-10">
-                    <textarea type="text" class="form-control summernote" name="descripcion" id="descripcion" placeholder="Descripcion" rows="4">{{$blog[0]['descripcion']}}</textarea>
+                    <textarea type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion" rows="4">{{$blog[0]['descripcion']}}</textarea>
                     </div>
                   </div>
                    <div class="form-group row">

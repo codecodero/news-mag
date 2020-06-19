@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Comentarios;
+use App\Blog;
 
 class ComentariosController extends Controller
 {
     public function index()
     {
         $comentarios = Comentarios::all();
-        return view("paginas.comentarios", array("comentarios" => $comentarios));
+        $blog   = Blog::all();
+        return view("paginas.comentarios", array("comentarios" => $comentarios,"blog" => $blog));
     }
 }
