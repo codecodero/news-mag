@@ -1,7 +1,7 @@
 //  TODO: configuración solo para (VISUAL STUDIO CODE con theme FUTURE FUNK)
 {
-    // "php.validate.executablePath": "/opt/lampp/bin/php-7.4.6",
-    // "phpfmt.php_bin": "/opt/lampp/bin/php-7.4.6",
+    "php.validate.executablePath": "/opt/lampp/bin/php-7.4.6",
+    "phpfmt.php_bin": "/opt/lampp/bin/php-7.4.6",
     "workbench.iconTheme": "vscode-icons-mac",
     "editor.fontFamily": "'Fira Code', 'Source Code Pro', monospace, 'Droid Sans Fallback'",
     "editor.lineHeight": 24,
@@ -18,6 +18,10 @@
     "breadcrumbs.enabled": false,
     "emmet.triggerExpansionOnTab": true,
     "blade.format.enable": true,
+    "phpfmt.exclude": [
+        "OrderAndRemoveUseClauses",
+        "StripNewlineWithinClassBody"
+    ],
     "editor.codeActionsOnSave": {
         "source.fixAll": true
     },
