@@ -12,9 +12,27 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $admins = Admin::all();
+        // $admins = Admin::all();
+        // $blog = Blog::all();
+        // return view('paginas.admin', array("admins" => $admins, "blog" => $blog));
+
+        if (request()->ajax()) {
+            return datatables()->of(Admin::all())
+                ->addColumn('acciones', function ($data) {
+                    $acciones = '<a href="' . url()->current() . '/' . $data->id . '" class="btn btn-outline-info btn-sm">
+                    <i class="fas fa-edit"></i>
+                    </a> |
+                    <a href="#" class="btn btn-outline-danger btn-sm btn-eliminar" data-action="' . url()->current() . '/' . $data->id . '" data-token="' . csrf_token() . '">
+                    <i class="fas fa-trash"></i>
+                    </a>';
+                    return $acciones;
+                })
+                ->rawColumns(['acciones'])
+                ->make(true);
+        }
         $blog = Blog::all();
-        return view('paginas.admin', array("admins" => $admins, "blog" => $blog));
+        return view('paginas.admin', array("blog" => $blog));
+
     }
     public function show($id)
     {
@@ -26,6 +44,31 @@ class AdminController extends Controller
             return \view('paginas.admin', array('status' => 404, "admins" => $admins, "blog" => $blog));
         }
     }
+    public function destroy($id, Request $request)
+    {
+        $user = Admin::where('id', $id)->get();
+        if (!empty($user) && $id != 1) {
+            if ($user[0]['foto'] != null) {
+                if ($user[0]['foto'] != 'img/admin/default.png') {
+                    \unlink($user[0]['foto']);
+                }
+            }
+
+            if (Admin::where('id', $id)->delete() > 0) {
+                // return \redirect("/admin")->with("delete-success", "");
+                return "ok";
+
+            } else {
+                return "error";
+                // return \redirect("/admin")->with("delete-error", "");
+
+            }
+        } else {
+            return \redirect("/admin")->with("delete-error", "");
+
+        }
+    }
+
     public function update($id, Request $request)
     {
         $datos = array(

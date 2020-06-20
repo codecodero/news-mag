@@ -35,7 +35,7 @@
             <div class="card-body">
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
+                <table id="tabla_usuario" class="table table-bordered table-hover dt-responsive">
                   <thead>
                     <tr>
                       <th>#</th>
@@ -47,19 +47,34 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($admins as $items=>$item)
+                    {{-- @foreach ($admins as $items=>$item)
                     <tr>
                       <td>{{$item['id']}}</td>
-                      <td>{{$item['name']}}</td>
-                      <td>{{$item['email']}}</td>
-                      <td><img width="40px" class="rounded-circle"
-                          src="{{isset($item['foto']) ? $blog[0]['cms'].'/'.$item['foto'] : $blog[0]['cms'].'img/admin/default.png'}}">
-                      </td>
-                      <td>{{$item['rol']==1?'Administrador':'Editor'}}</td>
-                      <td><a href="{{url('/')}}/admin/{{$item['id']}}" class="fas fa-edit btn btn-outline-info"></a> |
-                        <span class="fas fa-trash btn btn-outline-danger"></span></td>
+                    <td>{{$item['name']}}</td>
+                    <td>{{$item['email']}}</td>
+                    <td><img width="40px" class="rounded-circle"
+                        src="{{isset($item['foto']) ? $blog[0]['cms'].'/'.$item['foto'] : $blog[0]['cms'].'img/admin/default.png'}}">
+                    </td>
+                    <td>{{$item['rol']==1?'Administrador':'Editor'}}</td>
+                    <td>
+                      <a href="{{url('/')}}/admin/{{$item['id']}}" class="btn btn-outline-info btn-sm">
+                        <i class="fas fa-edit"></i>
+                      </a> |
+                      <a href="#" class="btn btn-outline-danger btn-sm btn-eliminar"
+                        data-action="{{url('/')}}/admin/{{$item['id']}}">
+                        @csrf
+                        <i class="fas fa-trash"></i>
+                      </a> --}}
+                      {{-- <form method="POST" action="{{url('/')}}/admin/{{$item['id']}}" class="d-inline">
+                      @method('DELETE')
+                      @csrf
+                      <button type="button" class="btn btn-outline-danger btn-sm btn-eliminar">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                      </form> --}}
+                      {{-- </td>
                     </tr>
-                    @endforeach
+                    @endforeach --}}
                   </tbody>
                   <tfoot>
                   </tfoot>
@@ -242,7 +257,7 @@
           <div class="form-group row">
             <label class="col-md-4 col-form-label text-md-right">{{ __('Foto') }}</label>
             <div class="col-md-6">
-              <img width="60px" class="rounded-circle"
+              <img width="60px" class="rounded-circle img_foto"
                 src="{{isset($item['foto']) ? $blog[0]['cms'].'/'.$item['foto'] : $blog[0]['cms'].'img/admin/default.png'}}"
                 alt="">
               <input type="hidden" name="foto_actual"
@@ -327,4 +342,23 @@ time:7
 </script>
 @endif
 
+@if(Session::has("delete-success"))
+<script>
+  notie.alert({
+  type:1,
+  text:'Eliminado correctamente',
+  time:7
+  });
+</script>
+@endif
+
+@if(Session::has("delete-error"))
+<script>
+  notie.alert({
+  type:3,
+  text:'Error al intentar eliminar a un Admin',
+  time:7
+  });
+</script>
+@endif
 @endsection
