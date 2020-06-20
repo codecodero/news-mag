@@ -1,7 +1,7 @@
 //  TODO: configuración solo para (VISUAL STUDIO CODE con theme FUTURE FUNK)
 {
-    "php.validate.executablePath": "/opt/lampp/bin/php-7.4.6",
-    "phpfmt.php_bin": "/opt/lampp/bin/php-7.4.6",
+    // "php.validate.executablePath": "/opt/lampp/bin/php-7.4.6",
+    // "phpfmt.php_bin": "/opt/lampp/bin/php-7.4.6",
     "workbench.iconTheme": "vscode-icons-mac",
     "editor.fontFamily": "'Fira Code', 'Source Code Pro', monospace, 'Droid Sans Fallback'",
     "editor.lineHeight": 24,
@@ -9,13 +9,33 @@
     "window.zoomLevel": 0.5,
     "editor.wordWrap": "on",
     "editor.fontLigatures": true,
+    "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "window.menuBarVisibility": "toggle",
     "files.autoSave": "onFocusChange",
     "workbench.colorTheme": "Future_Funk",
-    "terminal.integrated.fontWeightBold": "normal",
     "terminal.integrated.cursorStyle": "line",
     "breadcrumbs.enabled": false,
+    "emmet.triggerExpansionOnTab": true,
+    "blade.format.enable": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    },
+    "[blade.php]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[html]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "emmet.syntaxProfiles": {
+        "javascript": "html"
+    },
+    "emmet.includeLanguages": {
+        "javascript": "html",
+        "blade": "html"
+    },
     "editor.tokenColorCustomizations": {
         "comments": "#5C6773"
     },
@@ -45,8 +65,11 @@
         "dropdown.background": "#191E2A",
         "button.background": "#FEBE5A",
         "button.foreground": "#000000",
-        "editor.lineHighlightBackground": "#1F2430"
-    },
+        "editor.lineHighlightBackground": "#1F2430",
+        "editorIndentGuide.background": "#5B6475",
+        "editorIndentGuide.activeBackground": "#5B6475"
+    }
+},
     // TODO: configuracion terminal git bash sublime text con TERMINUS
     //=========TERMINUS=>COMMAND PALETTE
     ///////////////////////////////////////////////////////////

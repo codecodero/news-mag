@@ -1,6 +1,5 @@
 <?php
 // TODO: dar permiso a carpeta => sudo chmod -R 777 /nombre-carpeta
-//FIXME: dar permiso para mover archivos con php => sudo chmod -R 777 /nombre-ruta
 require_once 'modelo/blogModelo.php';
 require_once 'modelo/paginacionModelo.php';
 
@@ -14,3 +13,4 @@ require_once "controler/plantillaControler.php";
 
 $plantillaControl = new PlantillaControler();
 $plantillaControl->urls();
+//FIXME: php install=> apt install php7.4 libapache2-mod-php7.4 php7.4-mysql php-common php7.4-cli php7.4-common php7.4-json php7.4-opcache php7.4-readline
