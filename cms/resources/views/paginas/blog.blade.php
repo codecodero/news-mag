@@ -1,3 +1,6 @@
+  @foreach ($admin as $element)
+  @if ($element->email==$_COOKIE['email_login'])
+  @if ($element->rol==1)
   @extends('plantilla')
   @section('contenido')
   <div class="content-wrapper">
@@ -286,3 +289,10 @@
   </script> 
   @endif
   @endsection
+  @else
+  <script type="text/javascript">
+    window.location="{{url('/')}}/categorias";
+  </script>
+  @endif         
+  @endif
+@endforeach

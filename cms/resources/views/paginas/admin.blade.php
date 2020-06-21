@@ -1,3 +1,6 @@
+@foreach ($admin as $element)
+@if ($element->email==$_COOKIE['email_login'])
+@if ($element->rol==1)
 @extends('plantilla')
 @section('contenido')
 <!-- Content Wrapper. Contains page content -->
@@ -175,11 +178,11 @@
 
 @if(isset($status))
 @if ($status==200)
-@foreach ($admins as $item)
+@foreach ($user as $usr)
 <div class="modal fade" id="editarAdmin" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form method="POST" action="{{url('/')}}/admin/{{$item['id']}}" enctype="multipart/form-data">
+    <form method="POST" action="{{url('/')}}/admin/{{$usr['id']}}" enctype="multipart/form-data">
       @method('put')
       @csrf
       <div class="modal-content">
@@ -194,7 +197,7 @@
             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
             <div class="col-md-6">
               <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                value="{{ $item['name'] }}" required autocomplete="name" autofocus>
+                value="{{ $usr['name'] }}" required autocomplete="name" autofocus>
 
               @error('name')
               <span class="invalid-feedback" role="alert">
@@ -209,7 +212,7 @@
 
             <div class="col-md-6">
               <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                value="{{ $item['email'] }}" required autocomplete="email">
+                value="{{ $usr['email'] }}" required autocomplete="email">
 
               @error('email')
               <span class="invalid-feedback" role="alert">
@@ -233,14 +236,14 @@
               @enderror
             </div>
           </div>
-          <input type="hidden" name="contrasena_actual" value="{{ $item['password'] }}">
+          <input type="hidden" name="contrasena_actual" value="{{ $usr['password'] }}">
           <div class="form-group row">
             <label class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
             <div class="col-md-6">
               <select class="form-control" name="rol" id="rol">
                 <option value="0">--Seleccionar--</option>
-                <option {{ $item['rol']==1 ? 'selected' : ''}} value="1">Administrador</option>
-                <option {{ $item['rol']==2 ? 'selected' : ''}} value="2">Editor</option>
+                <option {{ $usr['rol']==1 ? 'selected' : ''}} value="1">Administrador</option>
+                <option {{ $usr['rol']==2 ? 'selected' : ''}} value="2">Editor</option>
               </select>
             </div>
           </div>
@@ -258,10 +261,10 @@
             <label class="col-md-4 col-form-label text-md-right">{{ __('Foto') }}</label>
             <div class="col-md-6">
               <img width="60px" class="rounded-circle img_foto"
-                src="{{isset($item['foto']) ? $blog[0]['cms'].'/'.$item['foto'] : $blog[0]['cms'].'img/admin/default.png'}}"
+                src="{{isset($usr['foto']) ? $blog[0]['cms'].'/'.$usr['foto'] : $blog[0]['cms'].'img/admin/default.png'}}"
                 alt="">
               <input type="hidden" name="foto_actual"
-                value="{{isset($item['foto']) ? $item['foto'] : 'img/admin/default.png'}}">
+                value="{{isset($usr['foto']) ? $usr['foto'] : 'img/admin/default.png'}}">
             </div>
           </div>
         </div>
@@ -362,3 +365,10 @@ time:7
 </script>
 @endif
 @endsection
+ @else
+  <script type="text/javascript">
+    window.location="{{url('/')}}/categorias";
+  </script>
+  @endif         
+  @endif
+@endforeach

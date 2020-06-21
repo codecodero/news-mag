@@ -1,52 +1,41 @@
-$(document).ready(function () {
+$(document).ready(function() {
     let url_host = document.location.origin;
     $(".summernote").summernote({
         callbacks: {
-            onImageUpload: function (files) {
+            onImageUpload: function(files) {
                 for (let i = 0; i < files.length; i++) {
                     SubirImagen(files[i]);
                 }
             },
         },
     });
-    let SubirImagen = function (imagenes) {
+    let SubirImagen = function(imagenes) {
         let datos = new FormData();
         datos.append("img", imagenes, imagenes.name);
         datos.append("ruta", url_host);
         $.ajax({
-            url: url_host + "/news-mag/cms/public/ajax/subir_img.php",
-            method: "POST",
-            data: datos,
-            contentType: false,
-            cache: false,
-            processData: false,
-        }) // optional, default = 'Yes'
-            .done(function (respuesta) {
+                url: url_host + "/news-mag/cms/public/ajax/subir_img.php",
+                method: "POST",
+                data: datos,
+                contentType: false,
+                cache: false,
+                processData: false,
+            }) // optional, default = 'Yes'
+            .done(function(respuesta) {
                 $(".summernote").summernote("insertImage", respuesta);
                 console.log("success");
-            })
-            .fail(function (jqXHR, textStatus, errorThown) {
+            }).fail(function(jqXHR, textStatus, errorThown) {
                 console.log("error" + errorThown);
-            })
-            .always(function () {
+            }).always(function() {
                 console.log("complete");
             });
     };
-
-    $(document).on("click", "#btn_add_red", function (e) {
+    $(document).on("click", "#btn_add_red", function(e) {
         let redes_socials = JSON.parse($("#redes_sociales").val());
         let url = $("#link_red").val();
         let icono = $("#icono_redes").val();
         if (url != "" && icono != 0) {
-            $("#socials").append(
-                '<div class="input-group mb-3"><div class= "input-group-prepend" ><span class="input-group-text"><i class="' +
-                    icono +
-                    '"></i></span></div><input type="text" class="form-control" placeholder="" value="' +
-                    url +
-                    '"><div class="input-group-append"><span class="btn btn-danger eliminar_red" data-url="' +
-                    url +
-                    '">&times;</span></div></div>'
-            );
+            $("#socials").append('<div class="input-group mb-3"><div class= "input-group-prepend" ><span class="input-group-text"><i class="' + icono + '"></i></span></div><input type="text" class="form-control" placeholder="" value="' + url + '"><div class="input-group-append"><span class="btn btn-danger eliminar_red" data-url="' + url + '">&times;</span></div></div>');
             redes_socials.push({
                 url: url,
                 icono: icono,
@@ -63,7 +52,7 @@ $(document).ready(function () {
         }
         e.preventDefault();
     });
-    $(document).on("click", ".eliminar_red", function () {
+    $(document).on("click", ".eliminar_red", function() {
         let redes_socials = JSON.parse($("#redes_sociales").val());
         let url_red = $(this).attr("data-url");
         for (let i = 0; i < redes_socials.length; i++) {
@@ -75,7 +64,7 @@ $(document).ready(function () {
             }
         }
     });
-    $("input[type='file']").change(function () {
+    $("input[type='file']").change(function() {
         let img = this.files[0];
         let nombreimg = $(this).attr("id");
         if (img["type"] != "image/jpeg" && img["type"] != "image/png") {
@@ -95,24 +84,23 @@ $(document).ready(function () {
         } else {
             let img_prev = new FileReader();
             img_prev.readAsDataURL(img);
-            $(img_prev).on("load", function (e) {
+            $(img_prev).on("load", function(e) {
                 let src_img = e.target.result;
                 $(".img_" + nombreimg).attr("src", src_img);
             });
         }
     });
-    $(document).on("click", ".btn-eliminar", function (e) {
+    $(document).on("click", ".btn-eliminar", function(e) {
         let method = "DELETE",
             action = $(this).attr("data-action"),
             // token = $(this).children("[name='_token']").attr("value");
             token = $(this).attr("data-token");
         let padre = $(this).parent().parent();
-
         notie.confirm({
             text: "¿Esta seguro de eliminar este Registro?",
             submitText: "Si, eliminar",
             cancelText: "Cancelar",
-            submitCallback: function () {
+            submitCallback: function() {
                 let datos = new FormData();
                 datos.append("_method", method);
                 datos.append("_token", token);
@@ -123,7 +111,7 @@ $(document).ready(function () {
                     cache: false,
                     contentType: false,
                     processData: false,
-                    success: function (respuesta) {
+                    success: function(respuesta) {
                         if (respuesta == "ok") {
                             notie.alert({
                                 type: 1,
@@ -131,19 +119,14 @@ $(document).ready(function () {
                                 time: 7,
                             });
                             padre.remove();
-                            tabla_admin
-                                .on("order.dt search.dt", function () {
-                                    tabla_admin
-                                        .column(0, {
-                                            search: "applied",
-                                            order: "applied",
-                                        })
-                                        .nodes()
-                                        .each(function (cell, i) {
-                                            cell.innertHTML = +i + 1;
-                                        });
-                                })
-                                .draw();
+                            tabla_admin.on("order.dt search.dt", function() {
+                                tabla_admin.column(0, {
+                                    search: "applied",
+                                    order: "applied",
+                                }).nodes().each(function(cell, i) {
+                                    cell.innertHTML = +i + 1;
+                                });
+                            }).draw();
                         } else {
                             notie.alert({
                                 type: 3,
@@ -152,12 +135,12 @@ $(document).ready(function () {
                             });
                         }
                     },
-                    error: function (jqXHR, textStatus, errorThrown) {
+                    error: function(jqXHR, textStatus, errorThrown) {
                         console.log("Error en: " + errorThrown);
                     },
                 });
             },
-            cancelCallback: function () {
+            cancelCallback: function() {
                 e.preventDefault();
             },
         });
@@ -168,55 +151,48 @@ $(document).ready(function () {
         ajax: {
             url: url_host + "/news-mag/cms/public/admin",
         },
-        columnDefs: [
-            {
-                searchable: true,
-                orderable: true,
-                targets: 0,
-            },
+        columnDefs: [{
+            searchable: true,
+            orderable: true,
+            targets: 0,
+        }, ],
+        order: [
+            [0, "desc"]
         ],
-        order: [[0, "desc"]],
-        columns: [
-            {
-                data: "id",
-                name: "id",
+        columns: [{
+            data: "id",
+            name: "id",
+        }, {
+            data: "name",
+            name: "name",
+        }, {
+            data: "email",
+            name: "email",
+        }, {
+            data: "foto",
+            name: "foto",
+            render: function(data, type, full, meta) {
+                if (data == null) {
+                    return `<img width="40px" class="rounded-circle" src="${url_host}/news-mag/cms/public/img/admin/default.png" >`;
+                } else {
+                    return `<img width="40px" class="rounded-circle" src="${url_host}/news-mag/cms/public/${data}" >`;
+                }
             },
-            {
-                data: "name",
-                name: "name",
+            orderable: false,
+        }, {
+            data: "rol",
+            name: "rol",
+            render: function(data, type, full, meta) {
+                if (data == 1) {
+                    return "Administrador";
+                } else {
+                    return "Editor";
+                }
             },
-            {
-                data: "email",
-                name: "email",
-            },
-            {
-                data: "foto",
-                name: "foto",
-                render: function (data, type, full, meta) {
-                    if (data == null) {
-                        return `<img width="40px" class="rounded-circle" src="${url_host}/news-mag/cms/public/img/admin/default.png" >`;
-                    } else {
-                        return `<img width="40px" class="rounded-circle" src="${url_host}/news-mag/cms/public/${data}" >`;
-                    }
-                },
-                orderable: false,
-            },
-            {
-                data: "rol",
-                name: "rol",
-                render: function (data, type, full, meta) {
-                    if (data == 1) {
-                        return "Administrador";
-                    } else {
-                        return "Editor";
-                    }
-                },
-            },
-            {
-                data: "acciones",
-                name: "acciones",
-            },
-        ],
+        }, {
+            data: "acciones",
+            name: "acciones",
+        }, ],
         language: {
             sProcessing: "Procesando...",
             sLengthMenu: "Mostrar _MENU_ registros",
@@ -237,26 +213,19 @@ $(document).ready(function () {
                 sPrevious: "Anterior",
             },
             oAria: {
-                sSortAscending:
-                    ": Activar para ordenar la columna de manera ascendente",
-                sSortDescending:
-                    ": Activar para ordenar la columna de manera descendente",
+                sSortAscending: ": Activar para ordenar la columna de manera ascendente",
+                sSortDescending: ": Activar para ordenar la columna de manera descendente",
             },
         },
     });
-    tabla_admin
-        .on("order.dt search.dt", function () {
-            tabla_admin
-                .column(0, {
-                    search: "applied",
-                    order: "applied",
-                })
-                .nodes()
-                .each(function (cell, i) {
-                    cell.innerHTML = +i + 1;
-                });
-        })
-        .draw();
+    tabla_admin.on("order.dt search.dt", function() {
+        tabla_admin.column(0, {
+            search: "applied",
+            order: "applied",
+        }).nodes().each(function(cell, i) {
+            cell.innerHTML = +i + 1;
+        });
+    }).draw();
     // $.ajax({
     //     url: url_host + "/news-mag/cms/public/admin",
     //     success: function (respuesta) {
@@ -266,4 +235,14 @@ $(document).ready(function () {
     //         console.log("Error en: " + errorThown);
     //     },
     // });
+    //Creando Cookie
+    let crear_cookie = function(nombre_cookie, valor, dias_expired) {
+        let hoy = new Date();
+        hoy.setTime(hoy.getTime() + (dias_expired * 24 * 60 * 60 * 1000));
+        let fecha_expired = "expires=" + hoy.toUTCString();
+        document.cookie = nombre_cookie + '=' + valor + "; " + fecha_expired;
+    };
+    $(document).on('change', '.email_login', function() {
+        crear_cookie('email_login', $(this).val(), 1);
+    });
 });

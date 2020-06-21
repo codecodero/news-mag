@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Admin;
 use App\Blog;
-use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -30,18 +30,30 @@ class AdminController extends Controller
                 ->rawColumns(['acciones'])
                 ->make(true);
         }
-        $blog = Blog::all();
-        return view('paginas.admin', array("blog" => $blog));
+        $blog  = Blog::all();
+        $admin = Admin::all();
+        return view('paginas.admin', array("blog" => $blog, "admin" => $admin));
 
     }
     public function show($id)
     {
-        $admins = Admin::where('id', $id)->get();
-        $blog = Blog::all();
-        if (\count($admins) > 0) {
-            return \view('paginas.admin', array('status' => 200, 'admins' => $admins, "blog" => $blog));
+        $user  = Admin::where('id', $id)->get();
+        $blog  = Blog::all();
+        $admin = Admin::all();
+        if (count($user) > 0) {
+            return view('paginas.admin', array(
+                'status' => 200,
+                'user'   => $user,
+                "blog"   => $blog,
+                "admin"  => $admin,
+            ));
         } else {
-            return \view('paginas.admin', array('status' => 404, "admins" => $admins, "blog" => $blog));
+            return view('paginas.admin', array(
+                'status' => 404,
+                "user"   => $user,
+                "blog"   => $blog,
+                "admin"  => $admin,
+            ));
         }
     }
     public function destroy($id, Request $request)
@@ -72,14 +84,14 @@ class AdminController extends Controller
     public function update($id, Request $request)
     {
         $datos = array(
-            "name" => $request->input('name'),
-            "email" => $request->input('email'),
-            "rol" => $request->input("rol"),
+            "name"              => $request->input('name'),
+            "email"             => $request->input('email'),
+            "rol"               => $request->input("rol"),
             "contrasena_actual" => $request->input('contrasena_actual'),
-            "foto_actual" => $request->input('foto_actual'),
+            "foto_actual"       => $request->input('foto_actual'),
         );
         $password = array("password" => $request->input('password'));
-        $foto = array("foto" => $request->file('foto'));
+        $foto     = array("foto" => $request->file('foto'));
 
         if ($password['password'] != null) {
             $validar_pas = \Validator::make($password, [
@@ -106,8 +118,8 @@ class AdminController extends Controller
             if ($img_validar->fails()) {
                 return \redirect('/admin')->with('img-invalido', "");
             } else {
-                $aleatoria = \mt_rand(10, 99);
-                $foto_new = "img/admin/" . $aleatoria . "." . $foto['foto']->guessExtension();
+                $aleatoria = \mt_rand(10, 999);
+                $foto_new  = "img/admin/admin" . $aleatoria . "." . $foto['foto']->guessExtension();
                 \move_uploaded_file($foto['foto'], $foto_new);
                 if ($datos['foto_actual'] != "img/admin/default.png") {
                     \unlink($datos['foto_actual']);
@@ -119,11 +131,11 @@ class AdminController extends Controller
 
         if (!empty($datos)) {
             $validar_user = \Validator::make($datos, [
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255'],
-                'rol' => ['required'],
+                'name'              => ['required', 'string', 'max:255'],
+                'email'             => ['required', 'string', 'email', 'max:255'],
+                'rol'               => ['required'],
                 'contrasena_actual' => ['required', 'string', 'min:8'],
-                'foto_actual' => ['required'],
+                'foto_actual'       => ['required'],
             ]);
             // dd($datos);
             if ($validar_user->fails()) {
@@ -131,11 +143,11 @@ class AdminController extends Controller
 
             } else {
                 $user = array(
-                    "name" => $datos['name'],
-                    "email" => $datos['email'],
+                    "name"     => $datos['name'],
+                    "email"    => $datos['email'],
                     "password" => $password_new,
-                    "rol" => $datos["rol"],
-                    "foto" => $foto_new,
+                    "rol"      => $datos["rol"],
+                    "foto"     => $foto_new,
                 );
                 if (User::where("id", $id)->update($user) > 0) {
                     return \redirect('/admin')->with("success", "");

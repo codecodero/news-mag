@@ -31,14 +31,21 @@
     <script src="{{url('/')}}/js/dashboard.js"></script>
     <title>News Mag</title>
 </head>
-
+@if (Route::has('login'))
+@auth
 <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-        @include('modulos.cabecera')
-        @include('modulos.sidebar')
-        @yield('contenido')
-        @include('modulos.footer')
-    </div>
+        <div class="wrapper">
+            @include('modulos.cabecera')
+            @include('modulos.sidebar')
+            @yield('contenido')
+            @include('modulos.footer')
+        </div>
+@else
+    <body class="hold-transition login-page">
+    @include('paginas.login') 
+
+@endauth
+@endif
 </body>
 
 </html>
