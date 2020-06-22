@@ -29,6 +29,8 @@
     <script src="{{url('/')}}/plugins/datatable/dataTables.responsive.min.js"></script>
     <script src="{{url('/')}}/plugins/datatable/responsive.bootstrap4.min.js"></script>
     <script src="{{url('/')}}/js/dashboard.js"></script>
+    <script src="{{url('/')}}/js/admin.js"></script>
+    <script src="{{url('/')}}/js/categorias.js"></script>
     <title>News Mag</title>
 </head>
 @if (Route::has('login'))
