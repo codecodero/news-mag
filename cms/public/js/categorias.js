@@ -88,4 +88,8 @@ $(document).ready(function() {
             cell.innerHTML = +i + 1;
         });
     }).draw();
+    $(document).on("change", "#categoria", function() {
+        let ruta_cat = $(this).val().toLocaleLowerCase();
+        $("#ruta").val(ruta_cat.replace(" ", "-"));
+    });
 });

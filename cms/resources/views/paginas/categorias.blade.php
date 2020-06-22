@@ -69,7 +69,7 @@
   <div class="modal fade" id="nuevoCategoria" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form method="POST" action="{{url('/')}}/categorias/store">
+    <form method="POST" action="{{url('/')}}/categorias/store" enctype="multipart/form-data">
       @csrf
       <div class="modal-content">
         <div class="modal-header">
@@ -107,10 +107,9 @@
           <div class="form-group row">
             <label for="ruta"
               class="col-md-4 col-form-label text-md-right">{{ __('URL Autogenerado') }}</label>
-
             <div class="col-md-6">
               <input id="ruta" type="text" class="form-control" name="ruta" required
-                autocomplete="ruta">
+                autocomplete="ruta" disabled="">
             </div>
           </div>
           <div class="form-group row">
@@ -118,7 +117,7 @@
 
             <div class="col-md-6">
               <input id="palabras_claves" type="palabras_claves" class="form-control @error('palabras_claves') is-invalid @enderror"
-                name="palabras_claves" required autocomplete="palabras_claves">
+                name="palabras_claves" required autocomplete="palabras_claves" data-role="tagsinput">
 
               @error('palabras_claves')
               <span class="invalid-feedback" role="alert">
@@ -153,4 +152,40 @@
     </form>
   </div>
 </div>
+@if (Session::has("categoria-img"))
+  <script>
+  notie.alert({
+  type:2,
+  text:'Debe seleccionar una Imagen Max. 2MB',
+  time:7
+  });
+</script>
+@endif
+@if (Session::has("categoria-error"))
+  <script>
+  notie.alert({
+  type:2,
+  text:'Debe ingresar datos validos de la categoria',
+  time:7
+  });
+</script>
+@endif
+@if (Session::has("success-categoria"))
+  <script>
+  notie.alert({
+  type:1,
+  text:'Categoria registrado correctamente',
+  time:7
+  });
+</script>
+@endif
+@if (Session::has("error-categoria"))
+  <script>
+  notie.alert({
+  type:3,
+  text:'Error al registrar categoria',
+  time:7
+  });
+</script>
+@endif
   @endsection

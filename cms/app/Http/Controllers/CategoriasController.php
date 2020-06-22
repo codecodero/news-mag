@@ -52,7 +52,7 @@ class CategoriasController extends Controller
     {
 
         $foto = array(
-            "img" => $request->file('foto');,
+            "img" => $request->file('foto'),
         );
 
         if (!empty($foto['foto'])) {
@@ -83,30 +83,30 @@ class CategoriasController extends Controller
         $datos = array(
             'categoria'       => $request->input("categoria"),
             'descripcion'     => $request->input("descripcion"),
-            'palabras_claves' => json_encode((explode(",", $request->input("palabras_claves"))),
-                'ruta' => $request->input("ruta"),
-                "img"  => $img,
-            );
+            'palabras_claves' => json_encode((explode(",", $request->input("palabras_claves")))),
+            'ruta'            => $request->input("ruta"),
+            "img"             => $img,
+        );
 
-            if (!empty($datos)) {
+        if (!empty($datos)) {
 
-                $validar_datos = Validar::make($datos, [
-                    "categoria"       => ['required', 'string'],
-                    "descripcion"     => ['required', 'string'],
-                    "palabras_claves" => ['required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i'],
-                    "ruta"            => 'required|regex:/^[-\\0-9a-z]+$/i',
-                    "img"             => "required",
-                ]);
-                if ($validar_datos->fails()) {
-                    return redirect('/categorias')->with("categoria-error", "");
+            $validar_datos = Validar::make($datos, [
+                "categoria"       => ['required', 'string', 'max:20'],
+                "descripcion"     => ['required', 'string', 'max:30'],
+                "palabras_claves" => ['required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i'],
+                "ruta"            => 'required|regex:/^[-\\0-9a-z]+$/i',
+                "img"             => "required",
+            ]);
+            if ($validar_datos->fails()) {
+                return redirect('/categorias')->with("categoria-error", "");
+            } else {
+                if (Categorias::store($datos) > 0) {
+                    return redirect('/categorias')->with("success-categoria", "");
                 } else {
-                    if (Categorias::store($datos) > 0) {
-                        return redirect('/categorias')->with("success-categoria");
-                    } else {
-                        return redirect('/')->with("error-categoria");
-                    }
+                    return redirect('/')->with("error-categoria", "");
                 }
             }
         }
-
     }
+
+}
