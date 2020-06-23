@@ -31,12 +31,25 @@
                 <h3 class="card-title">Artículos</h3>                
               </div>
               <div class="card-body">
-                <ul>
-                  @foreach ($articulos as $key => $item)
-                  <li>{{$item['titulo']}}</li>
-                <li><a href="#">{{$item->Categorias['descripcion']}}</a></li>
-                  @endforeach
-                </ul>
+                <table id="tabla_articulos" class="table table-bordered table-hover dt-responsive">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Titúlo</th>
+                      <th>Descripción</th>
+                      <th>Categoria</th>
+                      <th>Palabras Claves</th>
+                      <th>Ruta</th>
+                      <th width="300">Contenido</th>
+                      <th>Portada</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                  <tfoot>
+                  </tfoot>
+                </table>
               </div>
               <!-- /.card-body -->
               <div class="card-footer">

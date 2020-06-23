@@ -178,11 +178,10 @@
 
 @if(isset($status))
 @if ($status==200)
-@foreach ($user as $usr)
 <div class="modal fade" id="editarAdmin" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form method="POST" action="{{url('/')}}/admin/{{$usr['id']}}" enctype="multipart/form-data">
+    <form method="POST" action="{{url('/')}}/admin/{{$user[0]['id']}}" enctype="multipart/form-data">
       @method('put')
       @csrf
       <div class="modal-content">
@@ -197,7 +196,7 @@
             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
             <div class="col-md-6">
               <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                value="{{ $usr['name'] }}" required autocomplete="name" autofocus>
+                value="{{ $user[0]['name'] }}" required autocomplete="name" autofocus>
 
               @error('name')
               <span class="invalid-feedback" role="alert">
@@ -212,7 +211,7 @@
 
             <div class="col-md-6">
               <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                value="{{ $usr['email'] }}" required autocomplete="email">
+                value="{{ $user[0]['email'] }}" required autocomplete="email">
 
               @error('email')
               <span class="invalid-feedback" role="alert">
@@ -236,14 +235,14 @@
               @enderror
             </div>
           </div>
-          <input type="hidden" name="contrasena_actual" value="{{ $usr['password'] }}">
+          <input type="hidden" name="contrasena_actual" value="{{ $user[0]['password'] }}">
           <div class="form-group row">
             <label class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
             <div class="col-md-6">
               <select class="form-control" name="rol" id="rol">
                 <option value="0">--Seleccionar--</option>
-                <option {{ $usr['rol']==1 ? 'selected' : ''}} value="1">Administrador</option>
-                <option {{ $usr['rol']==2 ? 'selected' : ''}} value="2">Editor</option>
+                <option {{ $user[0]['rol']==1 ? 'selected' : ''}} value="1">Administrador</option>
+                <option {{ $user[0]['rol']==2 ? 'selected' : ''}} value="2">Editor</option>
               </select>
             </div>
           </div>
@@ -261,10 +260,10 @@
             <label class="col-md-4 col-form-label text-md-right">{{ __('Foto') }}</label>
             <div class="col-md-6">
               <img width="60px" class="rounded-circle img_foto"
-                src="{{isset($usr['foto']) ? $blog[0]['cms'].'/'.$usr['foto'] : $blog[0]['cms'].'img/admin/default.png'}}"
+                src="{{isset($user[0]['foto']) ? $blog[0]['cms'].'/'.$user[0]['foto'] : $blog[0]['cms'].'img/admin/default.png'}}"
                 alt="">
               <input type="hidden" name="foto_actual"
-                value="{{isset($usr['foto']) ? $usr['foto'] : 'img/admin/default.png'}}">
+                value="{{isset($user[0]['foto']) ? $user[0]['foto'] : 'img/admin/default.png'}}">
             </div>
           </div>
         </div>
@@ -276,7 +275,6 @@
     </form>
   </div>
 </div>
-@endforeach
 <script>
   $("#editarAdmin").modal();
 </script>

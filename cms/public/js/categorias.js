@@ -37,6 +37,9 @@ $(document).ready(function() {
         }, {
             data: "ruta",
             name: "ruta",
+            render: function(data, type, full, meta) {
+                return '<div class="validar_ruta">' + data + '</div>';
+            }
         }, {
             data: "img",
             name: "img",
@@ -49,8 +52,8 @@ $(document).ready(function() {
             },
             orderable: false,
         }, {
-            data: "fecha",
-            name: "fecha"
+            data: "created_at",
+            name: "created_at"
         }, {
             data: "acciones",
             name: "acciones"
@@ -88,8 +91,83 @@ $(document).ready(function() {
             cell.innerHTML = +i + 1;
         });
     }).draw();
-    $(document).on("change", "#categoria", function() {
+    $(document).on("keyup", ".ruta", function() {
         let ruta_cat = $(this).val().toLocaleLowerCase();
-        $("#ruta").val(ruta_cat.replace(" ", "-"));
+        ruta_cat = ruta_cat.replace(/ /g, "-");
+        ruta_cat = ruta_cat.replace(/[á]/g, 'a');
+        ruta_cat = ruta_cat.replace(/[é]/g, 'e');
+        ruta_cat = ruta_cat.replace(/[í]/g, 'i');
+        ruta_cat = ruta_cat.replace(/[ó]/g, 'o');
+        ruta_cat = ruta_cat.replace(/[ú]/g, 'u');
+        ruta_cat = ruta_cat.replace(/[ñ]/g, 'n');
+        $(".ruta").val(ruta_cat);
+        let valor_ruta = $(this).val();
+        let validar_ruta = $(".validar_ruta");
+        for (let i = 0; i < validar_ruta.length; i++) {
+            if ($(validar_ruta[i]).html() == valor_ruta) {
+                $(".ruta").val("");
+                notie.alert({
+                    type: 3,
+                    text: '<h4><b>Error con la Ruta</b></h4> Ya existe la ruta en la base de datos, elija otro',
+                    time: 7
+                });
+                $(".ruta").focus();
+            }
+        }
+    });
+    $(document).on("click", ".btn-eliminar-cat", function(e) {
+        let method = "DELETE",
+            action = $(this).attr("data-action"),
+            // token = $(this).children("[name='_token']").attr("value");
+            token = $(this).attr("data-token");
+        let padre = $(this).parent().parent();
+        notie.confirm({
+            text: "¿Esta seguro de eliminar este Registro?",
+            submitText: "Si, eliminar",
+            cancelText: "Cancelar",
+            submitCallback: function() {
+                let datos = new FormData();
+                datos.append("_method", method);
+                datos.append("_token", token);
+                $.ajax({
+                    url: action,
+                    method: "POST",
+                    data: datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(respuesta) {
+                        if (respuesta == "ok") {
+                            notie.alert({
+                                type: 1,
+                                text: "Eliminado correctamente",
+                                time: 7,
+                            });
+                            padre.remove();
+                            tabla_category.on("order.dt search.dt", function() {
+                                tabla_category.column(0, {
+                                    search: "applied",
+                                    order: "applied",
+                                }).nodes().each(function(cell, i) {
+                                    cell.innerHTML = +i + 1;
+                                });
+                            }).draw();
+                        } else {
+                            notie.alert({
+                                type: 3,
+                                text: "Error al intentar eliminar a un Admin",
+                                time: 7,
+                            });
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("Error en: " + errorThrown);
+                    },
+                });
+            },
+            cancelCallback: function() {
+                e.preventDefault();
+            },
+        });
     });
 });

@@ -12,8 +12,7 @@ class BlogControler
     }
     public static function MostrarCategorias()
     {
-        $tabla = "categoria";
-        $categorias = BlogModelo::MostrarCategorias($tabla);
+        $categorias = BlogModelo::MostrarCategorias();
         return $categorias;
     }
 
@@ -47,9 +46,9 @@ class BlogControler
     public static function GuardarComentario()
     {
         if (isset($_POST['nombre_comment']) && isset($_POST['correo_comment']) && isset($_POST['comment']) && isset($_POST['id_article'])) {
-            $name = $_POST['nombre_comment'];
-            $email = $_POST['correo_comment'];
-            $comment = $_POST['comment'];
+            $name       = $_POST['nombre_comment'];
+            $email      = $_POST['correo_comment'];
+            $comment    = $_POST['comment'];
             $id_article = $_POST['id_article'];
             if (preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/', $name) && preg_match('/^[=\\$\\;\\*\\"\\?\\¿\\!\\¡\\:\\.\\,\\0-9a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/', $comment)) {
                 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -63,7 +62,7 @@ class BlogControler
                         list($ancho, $alto) = getimagesize($_FILES["foto_comment"]["tmp_name"]);
 
                         $nuevoAncho = 128;
-                        $nuevoAlto = 128;
+                        $nuevoAlto  = 128;
 
                         /*=============================================
                         CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO

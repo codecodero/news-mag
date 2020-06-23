@@ -15,10 +15,10 @@ class BlogModelo
         $stm->close();
         $stm->null;
     }
-    public static function MostrarCategorias($tabla)
+    public static function MostrarCategorias()
     {
         $con = new Conexion();
-        $sql = "SELECT * FROM $tabla";
+        $sql = "SELECT DISTINCT(c.id),c.ruta,c.categoria,c.descripcion,c.palabras_claves,c.img FROM categoria c INNER JOIN articulo a on a.id_categoria=c.id WHERE a.id_categoria=c.id";
         $stm = $con->Conectar()->prepare($sql);
         $stm->execute();
         return $stm->fetchAll();
@@ -56,11 +56,11 @@ class BlogModelo
             $sql = "INSERT INTO comentarios (nombre_usuario,correo_usuario,img_usuario,comentario,id_articulo) VALUES (:nombre,:correo,:img,:comment,:id_art)";
             $smt = $con->Conectar()->prepare($sql);
             $smt->execute(array(
-                ":nombre" => $name,
-                ":correo" => $email,
-                ":img" => $img_user,
+                ":nombre"  => $name,
+                ":correo"  => $email,
+                ":img"     => $img_user,
                 ":comment" => $comment,
-                ":id_art" => $id_article,
+                ":id_art"  => $id_article,
 
             ));
             return 1;

@@ -8,7 +8,7 @@
 
 			<li class="breadcrumb-item inicio"><a href="<?php echo $blog['dominio']; ?>">Inicio</a></li>
 
-			<li class="breadcrumb-item active"><?php echo $articulos[0]['cat_descripcion']; ?></li>
+			<li class="breadcrumb-item active"><?php echo ($articulos[0]['id'] != "Error: vacío") ? $articulos[0]['cat_descripcion'] : 'Sin Artículos'; ?></li>
 
 		</ul>
 
@@ -17,8 +17,7 @@
 			<!-- COLUMNA IZQUIERDA -->
 
 			<div class="col-12 col-md-8 col-lg-9 p-0 pr-lg-5">
-
-
+				<?php if ($articulos[0]['id'] != 'Error: vacío'): ?>
 				<!-- ARTÍCULO 01 -->
                 <?php foreach ($articulos as $key => $item): ?>
 				<div class="row">
@@ -47,6 +46,13 @@
 				</div>
 				<hr class="mb-4 mb-lg-5" style="border: 1px solid #79FF39">
 				<?php endforeach?>
+				<?php else: ?>
+				<div class="row">
+					<div class="col-12 col-lg-5">
+					<p class ="pl-3 text-secundary">¡Esta Categorias aun no tiene Artículos!</p>
+					</div>
+				</div>
+				<?php endif?>
 
 				<!-- TODO:Paginación -->
 				<div class="container d-none d-md-block">
