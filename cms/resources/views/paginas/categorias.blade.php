@@ -116,7 +116,7 @@
               <label for="palabras_claves" class="col-md-4 col-form-label text-md-right">{{ __('Palabras Claves') }}</label>
 
               <div class="col-md-6">
-                <input id="palabras_claves" type="palabras_claves" class="form-control @error('palabras_claves') is-invalid @enderror"
+                <input id="palabras_claves" type="text" class="form-control"
                   name="palabras_claves" required autocomplete="palabras_claves" data-role="tagsinput">
 
                 @error('palabras_claves')
@@ -211,7 +211,7 @@
                   $tags=json_decode($categoria[0]['palabras_claves'],true);
                   $palabras_claves="";
                   foreach ($tags as $tg => $tag) {
-                    $palabras_claves.=$tag.", ";
+                    $palabras_claves.=$tag.",";
                   }
                 @endphp
                 <input id="palabras_claves" type="palabras_claves" class="form-control @error('palabras_claves') is-invalid @enderror"

@@ -109,7 +109,7 @@ if (isset($ruta[0])) {
     if (is_numeric($ruta[0])) {
         $pagina      = (int) $ruta[0];
         $postXpagina = 5;
-        PaginacionControl::config($pagina, $postXpagina, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.fecha,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria", 5);
+        PaginacionControl::config($pagina, $postXpagina, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.created_at,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria", 5);
 
         $datos_pag = PaginacionControl::data();
         if ($datos_pag['error']) {
@@ -137,7 +137,7 @@ if (isset($ruta[0])) {
             $pagina      = (isset($ruta[2])) ? (int) $ruta[2] : 1;
             $postXpagina = 5;
             $buscar      = $ruta[1];
-            PaginacionControl::config($pagina, $postXpagina, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,c.ruta,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.fecha,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria WHERE a.descripcion LIKE '%$buscar%' OR a.titulo LIKE '%$buscar%' OR a.contenido LIKE '%$buscar%'", 5);
+            PaginacionControl::config($pagina, $postXpagina, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,c.ruta,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.created_at,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria WHERE a.descripcion LIKE '%$buscar%' OR a.titulo LIKE '%$buscar%' OR a.contenido LIKE '%$buscar%'", 5);
             $dts_pg = PaginacionControl::data();
             if ($dts_pg['error']) {
 
@@ -158,7 +158,7 @@ if (isset($ruta[0])) {
             $pagina = (isset($ruta[1])) ? (int) $ruta[1] : 1;
 
             $postXpagina = 5;
-            PaginacionControl::config($pagina, $postXpagina, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,c.ruta,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.fecha,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria WHERE c.ruta='$catg'", 5);
+            PaginacionControl::config($pagina, $postXpagina, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,c.ruta,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.created_at,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria WHERE c.ruta='$catg'", 5);
             $dts_pg = PaginacionControl::data();
             if ($dts_pg['error']) {
 
@@ -170,7 +170,6 @@ if (isset($ruta[0])) {
             }
 
         } else {
-
             include 'paginas/error404.php';
 
         }
@@ -179,7 +178,7 @@ if (isset($ruta[0])) {
 } else {
     $pagina      = 1;
     $postXpagina = 5;
-    PaginacionControl::config($pagina, $postXpagina, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.fecha,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria", 5);
+    PaginacionControl::config($pagina, $postXpagina, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.created_at,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria", 5);
 
     $datos_pag = PaginacionControl::data();
     if ($datos_pag['error']) {
@@ -187,14 +186,11 @@ if (isset($ruta[0])) {
         include 'paginas/error404.php';
     } else {
         $articulos = PaginacionControl::MostrarFilas("id", "DESC");
-
         include 'paginas/inicio.php';
     }
 
 }
-
 include 'paginas/seccion/footer.php';
-
 ?>
 <script src="https://kit.fontawesome.com/e632f1f723.js" crossorigin="anonymous"></script>
 <script src="<?php echo $blog['dominio']; ?>vista/js/script.js"></script>
