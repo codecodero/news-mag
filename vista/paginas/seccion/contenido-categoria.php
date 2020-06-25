@@ -26,7 +26,7 @@
 
 						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><h5 class="d-block d-lg-none py-3"><?php echo $item['titulo']; ?></h5></a>
 
-						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><img src="<?php echo $blog['dominio'] . $item['img']; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
+						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><img src="<?php echo $blog['cms'] . $item['img']; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
 
 					</div>
 
@@ -113,7 +113,7 @@ $feacture_articles = PaginacionControl::MostrarFilas("vista", "DESC");
 
 							<a href="<?php echo $blog['dominio'] . $articls['ruta']; ?>">
 
-								<img src="<?php echo $blog['dominio'] . $articls['img']; ?>" alt="<?php echo $articls['titulo']; ?>" class="img-fluid">
+								<img src="<?php echo $blog['cms'] . $articls['img']; ?>" alt="<?php echo $articls['titulo']; ?>" class="img-fluid">
 
 							</a>
 

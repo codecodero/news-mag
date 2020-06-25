@@ -115,15 +115,15 @@ class ArticulosController extends Controller
 
         if (!empty($datos)) {
             $validar_datos = \Validator::make($datos, [
-                'titulo'          => ['required', 'string', 'max:50'],
+                'titulo'          => ['required', 'string', 'max:80'],
                 'descripcion'     => ['required'],
                 "categoria"       => ['required'],
                 'ruta'            => 'required|regex:/^[-\\0-9a-z]+$/i',
                 'palabras_claves' => 'required|regex:/^[,\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
-                'contenido'       => 'required|regex:/^[(\\)\\=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
+                'contenido'       => ['required', 'string', 'max:50000'],
             ]);
-
             if ($validar_datos->fails()) {
+                dd($datos);
                 return redirect("/articulos")->with("error-datos", "");
             } else {
                 $articulo                  = new Articulos();
@@ -220,12 +220,12 @@ class ArticulosController extends Controller
 
         if (!empty($datos)) {
             $validar_datos = \Validator::make($datos, [
-                'titulo'          => ['required', 'string', 'max:50'],
+                'titulo'          => ['required', 'string', 'max:80'],
                 'descripcion'     => ['required'],
                 "categoria"       => ['required'],
                 'ruta'            => 'required|regex:/^[-\\0-9a-z]+$/i',
                 'palabras_claves' => 'required|regex:/^[,\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
-                'contenido'       => 'required|regex:/^[(\\)\\=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
+                'contenido'       => ['required', 'string', 'max:50000'],
                 "img_actual"      => 'required',
             ]);
             if ($validar_datos->fails()) {
@@ -258,6 +258,7 @@ class ArticulosController extends Controller
         if (!empty($validar_art)) {
             if ($validar_art[0]['img'] != "img/articulos/default.png") {
                 unlink($validar_art[0]['img']);
+                rmdir('img/articulos/' . $validar_art[0]['ruta'] . '/');
             }
             if (Articulos::where('id', $validar_art[0]['id'])->delete() > 0) {
                 return "ok";

@@ -41,7 +41,7 @@ class BlogModelo
     public static function MostrarOpiones($id_article)
     {
         $con = new Conexion();
-        $sql = "SELECT comentarios.*,admin.* FROM comentarios INNER JOIN admin ON comentarios.id_admin=admin.id WHERE comentarios.id_articulo=:id_art";
+        $sql = "SELECT comentarios.*,user.* FROM comentarios INNER JOIN admin ON comentarios.id_user=user.id WHERE comentarios.id_articulo=:id_art";
         $smt = $con->Conectar()->prepare($sql);
         $smt->bindParam(":id_art", $id_article, PDO::PARAM_STR);
         $smt->execute();

@@ -17,7 +17,7 @@ BlogControler::ActualizarCantidadVistas($articulo['id'], $articulo['vista']);
 
 				</div>
 
-				<img src="<?php echo $blog['dominio']; ?>vista/img/bannerGrande01.jpg" class="img-fluid">
+				<img src="<?php echo $blog['cms']; ?>vista/img/bannerGrande01.jpg" class="img-fluid">
 
 			</li>
 
@@ -82,8 +82,10 @@ BlogControler::ActualizarCantidadVistas($articulo['id'], $articulo['vista']);
 						<h3 class="tituloArticulo text-right text-muted pl-3 pt-lg-2"><?php echo $articulo['titulo']; ?></h3>
 
 					</div>
-
-					<?php echo $articulo['contenido']; ?>
+					<img class="img-fluid mt-3 mb-3" src="<?php echo $blog['cms'] . $articulo['img'] ?>">
+					<div class="row container">
+						<?php echo $articulo['contenido']; ?>
+					</div>
 
 					<!-- COMPARTIR EN REDES -->
 
@@ -202,7 +204,7 @@ $articles_data = PaginacionControl::MostrarFilas("id", "DESC");
 					<?php foreach ($comments as $data => $comment): ?>
 						<?php if ($comment['estado'] != 0): ?>
 							<div class="col-3 col-sm-4 col-lg-2 p-2">
-								<img src="<?php echo $blog['dominio'] . $comment['img_usuario']; ?>" class="img-thumbnail">
+								<img src="<?php echo $blog['cms'] . $comment['img_usuario']; ?>" class="img-thumbnail">
 							</div>
 							<div class="col-9 col-sm-8 col-lg-10 p-2 text-muted">
 								<p><?php echo $comment['comentario']; ?></p>
@@ -216,7 +218,7 @@ $articles_data = PaginacionControl::MostrarFilas("id", "DESC");
 								<span class="small float-right"><?php echo $comment['admin'] . ' | ' . date('d.m.Y', $formatter_date); ?></span>
 							</div>
 							<div class="col-3 col-sm-4 col-lg-2 p-2">
-								<img src="<?php echo $blog['dominio'] . $comment['img_admin']; ?>" class="img-thumbnail">
+								<img src="<?php echo $blog['cms'] . $comment['img_admin']; ?>" class="img-thumbnail">
 							</div>
 							<?php endif?>
 						<?php endif?>
@@ -240,7 +242,7 @@ $articles_data = PaginacionControl::MostrarFilas("id", "DESC");
 							</div>
 							<input type="file" name="foto_comment" class="d-none" id="foto_comment">
 							<label for="foto_comment" class="d-none d-md-block col-md-4 col-lg-3">
-								<img src="<?php echo $blog['dominio']; ?>vista/img/subirFoto.png" class="img-fluid mt-md-3 mt-xl-2 img_comment">
+								<img src="<?php echo $blog['cms']; ?>vista/img/subirFoto.png" class="img-fluid mt-md-3 mt-xl-2 img_comment">
 							</label>
 						</div>
 						<textarea class="form-control my-3" rows="7" placeholder="Escribe aquí tu mensaje" name="comment"></textarea>
@@ -270,7 +272,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					</form>
 					<!-- PUBLICIDAD -->
 
-					<img src="<?php echo $blog['dominio']; ?>vista/img/ad01.jpg" class="img-fluid my-3 d-block d-md-none" width="100%">
+					<img src="<?php echo $blog['cms']; ?>vista/img/ad01.jpg" class="img-fluid my-3 d-block d-md-none" width="100%">
 				</div>
 			</div>
 
@@ -287,7 +289,7 @@ $articles_recientes = PaginacionControl::MostrarFilas("id", "DESC");
 					<div class="d-flex my-3">
 						<div class="w-100 w-xl-50 pr-3 pt-2">
 							<a href="<?php echo $blog['dominio'] . $article_recent['ruta']; ?>">
-								<img src="<?php echo $blog['dominio'] . $article_recent['img']; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid">
+								<img src="<?php echo $blog['cms'] . $article_recent['img']; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid">
 							</a>
 						</div>
 						<div>

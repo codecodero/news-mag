@@ -23,7 +23,7 @@ include "seccion/banner-interno.php";?>
 
                             <a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><h5 class="d-block d-lg-none py-3"><?php echo $item['titulo']; ?></h5></a>
 
-                            <a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><img src="<?php echo $blog['dominio'] . $item['img']; ?>" alt="<?php echo $item['titulo']; ?>" class="img-fluid" width="100%"></a>
+                            <a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><img src="<?php echo $blog['cms'] . $item['img']; ?>" alt="<?php echo $item['titulo']; ?>" class="img-fluid" width="100%"></a>
 
                         </div>
 
@@ -84,7 +84,7 @@ include "seccion/banner-interno.php";?>
 
 					<h4>Sobre Mi</h4>
 
-					<img src="<?php echo $blog['dominio']; ?>vista/img/sobreMi.jpg" alt="Lorem ipsum dolor sit amet" class="img-fluid my-1">
+					<img src="<?php echo $blog['cms']; ?>vista/img/sobreMi.jpg" alt="Lorem ipsum dolor sit amet" class="img-fluid my-1">
 
 					<p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum odio, eos architecto atque numquam alias laboriosam minima beatae consectetur.</p>
 
@@ -96,14 +96,14 @@ include "seccion/banner-interno.php";?>
 
 					<h4>Artículos Destacados</h4>
 <?php
-PaginacionControl::config(1, 4, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.fecha,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria", 4);
+PaginacionControl::config(1, 4, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.created_at,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria", 4);
 $feacture_article = PaginacionControl::MostrarFilas("vista", "DESC");
 ?>
 					<?php foreach ($feacture_article as $feartures => $feacture_articles): ?>
 					<div class="d-flex my-3">
 						<div class="w-100 w-xl-50 pr-3 pt-2">
 							<a href="<?php echo $blog['dominio'] . $feacture_articles['ruta']; ?>">
-								<img src="<?php echo $blog['dominio'] . $feacture_articles['img']; ?>" alt="<?php echo $feacture_articles['titulo']; ?>" class="img-fluid">
+								<img src="<?php echo $blog['cms'] . $feacture_articles['img']; ?>" alt="<?php echo $feacture_articles['titulo']; ?>" class="img-fluid">
 							</a>
 						</div>
 						<div>

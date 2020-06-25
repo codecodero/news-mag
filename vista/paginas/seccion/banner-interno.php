@@ -14,7 +14,7 @@ $banners = BlogControler::MostrarBanner("interno");
 					<h1><?=$banner['titulo_banner'];?></h1>
 					<h5><?=$banner["descripcion_banner"];?></h5>
 				</div>
-				<img src="<?php echo $blog['dominio'] . $banner['img_banner']; ?>" class="img-fluid">
+				<img src="<?php echo $blog['cms'] . $banner['img_banner']; ?>" class="img-fluid">
 			</li>
 			<?php endforeach?>
 		</ul>
