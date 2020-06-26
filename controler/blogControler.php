@@ -68,7 +68,7 @@ class BlogControler
                         CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
                         =============================================*/
 
-                        $directorio = "vista/img/usuarios/";
+                        $directorio = "cms/public/";
 
                         /*=============================================
                         DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
@@ -78,7 +78,7 @@ class BlogControler
 
                             $aleatorio = mt_rand(100, 9999);
 
-                            $img_user = $directorio . "usuario" . $aleatorio . ".jpg";
+                            $img_user = "img/admin/usuario" . $aleatorio . ".jpg";
 
                             $origen = imagecreatefromjpeg($_FILES["foto_comment"]["tmp_name"]);
 
@@ -86,13 +86,13 @@ class BlogControler
 
                             imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
 
-                            imagejpeg($destino, $img_user);
+                            imagejpeg($destino, $directorio . $img_user);
 
                         } else if ($_FILES["foto_comment"]["type"] == "image/png") {
 
                             $aleatorio = mt_rand(100, 9999);
 
-                            $img_user = $directorio . "usuario" . $aleatorio . ".png";
+                            $img_user = "img/admin/usuario" . $aleatorio . ".png";
 
                             $origen = imagecreatefrompng($_FILES["foto_comment"]["tmp_name"]);
 
@@ -104,7 +104,7 @@ class BlogControler
 
                             imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
 
-                            imagepng($destino, $img_user);
+                            imagepng($destino, $directorio . $img_user);
 
                         } else {
 
@@ -113,7 +113,7 @@ class BlogControler
 
                     } else {
 
-                        $img_user = "vista/img/user02.jpg";
+                        $img_user = "img/admin/default.png";
                     }
                     $respuesta = BlogModelo::GuardarComentario($name, $email, $id_article, $comment, $img_user);
                     return $respuesta;

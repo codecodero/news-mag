@@ -26,6 +26,16 @@
     $(document).ready(function() {
         $(".summernote").summernote({
             height: 150,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link']],
+                ['view', ['fullscreen', 'codeview', 'help']],
+            ],
             callbacks: {
                 onImageUpload: function(files) {
                     for (let i = 0; i < files.length; i++) {

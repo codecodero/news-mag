@@ -1,10 +1,9 @@
-;
-(function() {
-    let tabla_admin = $("#tabla_usuario").DataTable({
+jQuery(document).ready(function($) {
+    let tabla_comentarios = $("#tabla_comentarios").DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: url_host + "/news-mag/cms/public/admin",
+            url: url_host + "/news-mag/cms/public/comentarios",
         },
         columnDefs: [{
             searchable: true,
@@ -15,17 +14,20 @@
             [0, "desc"]
         ],
         columns: [{
-            data: "id",
-            name: "id",
+            data: "id_comentario",
+            name: "id_comentario",
         }, {
-            data: "name",
-            name: "name",
+            data: "titulo",
+            name: "titulo",
         }, {
-            data: "email",
-            name: "email",
+            data: "nombre_usuario",
+            name: "nombre_usuario",
         }, {
-            data: "foto",
-            name: "foto",
+            data: "correo_usuario",
+            name: "correo_usuario",
+        }, {
+            data: "img_usuario",
+            name: "img_usuario",
             render: function(data, type, full, meta) {
                 if (data == null) {
                     return `<img width="40px" class="rounded-circle" src="${url_host}/news-mag/cms/public/img/admin/default.png" >`;
@@ -35,15 +37,17 @@
             },
             orderable: false,
         }, {
-            data: "rol",
-            name: "rol",
-            render: function(data, type, full, meta) {
-                if (data == 1) {
-                    return "Administrador";
-                } else {
-                    return "Editor";
-                }
-            },
+            data: "comentario",
+            name: "comentario",
+        }, {
+            data: "id",
+            name: "id",
+        }, {
+            data: "estado",
+            name: "estado",
+        }, {
+            data: "respuesta",
+            name: "respuesta",
         }, {
             data: "acciones",
             name: "acciones",
@@ -73,8 +77,8 @@
             },
         },
     });
-    tabla_admin.on("order.dt search.dt", function() {
-        tabla_admin.column(0, {
+    tabla_comentarios.on("order.dt search.dt", function() {
+        tabla_comentarios.column(0, {
             search: "applied",
             order: "applied",
         }).nodes().each(function(cell, i) {
@@ -82,12 +86,12 @@
         });
     }).draw();
     // $.ajax({
-    //     url: url_host + "/news-mag/cms/public/admin",
-    //     success: function (respuesta) {
+    //     url: url_host + "/news-mag/cms/public/comentarios",
+    //     success: function(respuesta) {
     //         console.log("Success:", respuesta);
     //     },
-    //     error: function (jqXHR, textStatus, errorThown) {
+    //     error: function(jqXHR, textStatus, errorThown) {
     //         console.log("Error en: " + errorThown);
     //     },
     // });
-})();
+});

@@ -196,7 +196,7 @@ $articles_data = PaginacionControl::MostrarFilas("id", "DESC");
 				  	<h3 style="color:#8e4876">Opiniones</h3>
 
 				  	<hr style="border: 1px solid #79FF39">
-					  <?php $comments = BlogControler::MostrarOpiones($articulo['id']);?>
+					  <?php $comments = BlogControler::MostrarOpiones($articulo['id'])?>
 					<div class="row opiniones">
 					<?php if (count($comments) == 0): ?>
 					<p class ="pl-3 text-secundary">¡Este articulo no tiene comentarios!</p>
@@ -215,10 +215,10 @@ $articles_data = PaginacionControl::MostrarFilas("id", "DESC");
 							<div class="col-9 col-sm-8 col-lg-10 p-2 text-muted">
 								<p><?php echo $comment['respuesta_comentario']; ?></p>
 								<?php $formatter_date = strtotime($comment['fecha_respuesta']);?>
-								<span class="small float-right"><?php echo $comment['admin'] . ' | ' . date('d.m.Y', $formatter_date); ?></span>
+								<span class="small float-right"><?php echo $comment['name'] . ' | ' . date('d.m.Y', $formatter_date); ?></span>
 							</div>
 							<div class="col-3 col-sm-4 col-lg-2 p-2">
-								<img src="<?php echo $blog['cms'] . $comment['img_admin']; ?>" class="img-thumbnail">
+								<img src="<?php echo $blog['cms'] . $comment['foto']; ?>" class="img-thumbnail">
 							</div>
 							<?php endif?>
 						<?php endif?>

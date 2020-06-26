@@ -15,7 +15,7 @@
 
 						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><h5 class="d-block d-lg-none py-3"><?php echo $item['titulo']; ?></h5></a>
 
-						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><img src="<?php echo $blog['dominio'] . $item['img']; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
+						<a href="<?php echo $blog['dominio'] . $item['ruta'] ?>"><img src="<?php echo $blog['cms'] . $item['img']; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
 
 					</div>
 
@@ -73,7 +73,7 @@
 
 					<h4><a href="<?php echo $blog['dominio'] . "sobre-mi"; ?>" >Sobre Mi</a></h4>
 
-					<img src="<?php echo $blog['dominio'] . $blog['img_sobre_mi']; ?>" alt="<?=$blog['img_sobre_mi'];?>" class="img-fluid my-1">
+					<img src="<?php echo $blog['cms'] . $blog['img_sobre_mi']; ?>" alt="<?=$blog['img_sobre_mi'];?>" class="img-fluid my-1">
 
 					<p class="small"><?php echo $blog['descripcion']; ?></p>
 
@@ -92,7 +92,7 @@ $feacture_article = PaginacionControl::MostrarFilas("vista", "DESC");
 					<div class="d-flex my-3">
 						<div class="w-100 w-xl-50 pr-3 pt-2">
 							<a href="<?php echo $blog['dominio'] . $feacture_articles['ruta']; ?>">
-								<img src="<?php echo $blog['dominio'] . $feacture_articles['img']; ?>" alt="<?php echo $feacture_articles['titulo']; ?>" class="img-fluid">
+								<img src="<?php echo $blog['cms'] . $feacture_articles['img']; ?>" alt="<?php echo $feacture_articles['titulo']; ?>" class="img-fluid">
 							</a>
 						</div>
 						<div>

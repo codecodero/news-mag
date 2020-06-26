@@ -32,6 +32,7 @@
     <script src="{{url('/')}}/js/admin.js"></script>
     <script src="{{url('/')}}/js/categorias.js"></script>
     <script src="{{url('/')}}/js/articulos.js"></script>
+    <script src="{{url('/')}}/js/comentarios.js"></script>
     <title>News Mag</title>
 </head>
 @if (Route::has('login'))
