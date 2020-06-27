@@ -1,4 +1,5 @@
 <?php
+$banners = BlogControler::MostrarBanner("interno");
 BlogControler::ActualizarCantidadVistas($articulo['id'], $articulo['vista']);
 ?>
 <div class="bannerEstatico d-none d-md-block"></div>
@@ -7,20 +8,20 @@ BlogControler::ActualizarCantidadVistas($articulo['id'], $articulo['vista']);
 	<div class="slide-inner">
 
 		<ul class="slide-area">
-
+<?php foreach ($banners as $banrs => $banner): ?>
 			<li>
 
 				<div class="d-none d-md-block textoBanner">
 
-					<h1>Watch how we work</h1>
-					<h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit ea quidem</h5>
+					<h1><?php echo $banner['titulo_banner']; ?></h1>
+					<h5><?php echo $banner['descripcion_banner']; ?></h5>
 
 				</div>
 
-				<img src="<?php echo $blog['cms']; ?>vista/img/bannerGrande01.jpg" class="img-fluid">
+				<img src="<?php echo $blog['cms'] . $banner['img_banner']; ?>" class="img-fluid">
 
 			</li>
-
+<?php endforeach?>
 		</ul>
 
 	</div>

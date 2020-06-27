@@ -1,9 +1,5 @@
 //  TODO: configuración solo para (VISUAL STUDIO CODE con theme FUTURE FUNK)
 //plugin sublime text: (Laravel Blade Highlighter- laravel-snipetts)
-//code-linux=3cb2e6e7c605a10d953bdd0e375eaed73f96f065
-//code-windows=d4cc61145301a33d34cfe9b088c63c9483b2bbd2
-//sublime-linux=2a527c4a01d37b921edb4e8a9326cb0f28e275d7
-//SUBLIME-Windows:508ff79457e51124d0c51c9be195eb530ac42810
 {
     "php.validate.executablePath": "/opt/lampp/bin/php-7.4.6",
     "phpfmt.php_bin": "/opt/lampp/bin/php-7.4.6",

@@ -9,7 +9,17 @@ $banners = BlogControler::MostrarBanner("inicio");
 
 		<ul class="slide-area">
 		<?php foreach ($banners as $banrs => $banner): ?>
-			<li><img src="<?php echo $blog['dominio'] . $banner['img_banner']; ?>" class="img-fluid"></li>
+
+			<li>
+				<div class="d-none d-md-block textoBanner">
+
+					<h1><?php echo $banner['titulo_banner']; ?></h1>
+					<h5><?php echo $banner['descripcion_banner']; ?></h5>
+
+				</div>
+
+				<img src="<?php echo $blog['cms'] . $banner['img_banner']; ?>" class="img-fluid">
+			</li>
 		<?php endforeach?>
 		</ul>
 

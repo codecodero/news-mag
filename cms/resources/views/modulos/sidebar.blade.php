@@ -31,13 +31,13 @@
         @if ($element->email==$_COOKIE['email_login'])
         @if ($element->rol==1)
         <li class="nav-item">
-          <a href="{{url('/')}}/blog" class="nav-link">
+          <a href="{{url('/')}}/blog" class="nav-link {{request()->is('blog')?'active':''}}">
             <i class="nav-icon fas fa-th-large"></i>
             <p>Blog</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{url('/')}}/admin" class="nav-link">
+          <a href="{{url('/')}}/admin" class="nav-link {{request()->is('admin')?'active':''}}">
             <i class="nav-icon fas fa-users-cog"></i>
             <p>Administradores</p>
           </a>
@@ -46,31 +46,31 @@
         @endif
         @endforeach
         <li class="nav-item">
-          <a href="{{url('/')}}/categorias" class="nav-link">
+          <a href="{{url('/')}}/categorias" class="nav-link {{request()->is('categorias')?'active':''}}">
             <i class="nav-icon fas fa-layer-group"></i>
             <p>Categorias</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{url('/')}}/articulos" class="nav-link">
+          <a href="{{url('/')}}/articulos" class="nav-link {{request()->is('articulos')?'active':''}}">
             <i class="nav-icon fas fa-newspaper"></i>
             <p>Artículos</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{url('/')}}/comentarios" class="nav-link">
+          <a href="{{url('/')}}/comentarios" class="nav-link {{request()->is('comentarios')?'active':''}}">
             <i class="nav-icon fas fa-comments"></i>
             <p>Comentarios</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{url('/')}}/banner" class="nav-link">
+          <a href="{{url('/')}}/banner" class="nav-link {{request()->is('banner')?'active':''}}">
             <i class="nav-icon fas fa-photo-video"></i>
             <p>Benners</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{url('/')}}/ads" class="nav-link">
+          <a href="{{url('/')}}/ads" class="nav-link {{request()->is('ads')?'active':''}}">
             <i class="nav-icon fas fa-ad"></i>
             <p>Ads</p>
           </a>

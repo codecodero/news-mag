@@ -19,7 +19,7 @@
       @foreach ($admin as $user)
       @if ($user->email==$_COOKIE['email_login'])
       <li class="nav-item dropdown">
-        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><img class="rounded" width="30" src="{{($user->foto!=null) ? (url('/').'/'. $user->foto) : (url('/').'/'.'img/admin/default.png') }}"> <span class="caret"></span>
+        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><img class="rounded-circle" width="30" src="{{($user->foto!=null) ? (url('/').'/'. $user->foto) : (url('/').'/'.'img/admin/default.png') }}"> <span class="caret"></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" data-widget="control-sidebar" data-slide="true" role="button" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">          

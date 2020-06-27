@@ -34,11 +34,11 @@ class ComentariosController extends Controller
                 })
                 ->addColumn("acciones", function ($data) {
                     $acciones = '<a href="' . url()->current() . '/' . $data->id_comentario . '" class="btn btn-outline-info btn-sm">
-				                <i class="fas fa-edit"></i>
-				                </a> |
-				                <a href="#" class="btn btn-outline-danger btn-sm btn-eliminar-art" data-action="' . url()->current() . '/' . $data->id_comentario . '" data-token="' . csrf_token() . '">
-				                <i class="fas fa-trash"></i>
-				                </a>';
+                                <i class="fas fa-edit"></i>
+                                </a> |
+                                <a href="#" class="btn btn-outline-danger btn-sm btn-eliminar-comentario" data-action="' . url()->current() . '/' . $data->id_comentario . '" data-token="' . csrf_token() . '">
+                                <i class="fas fa-trash"></i>
+                                </a>';
                     return $acciones;
                 })
                 ->rawColumns(["comentario", "respuesta", "estado", "acciones"])
@@ -101,14 +101,14 @@ class ComentariosController extends Controller
             return redirect('/comentarios')->with("datos_vacio", "");
         }
     }
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         $comentario = Comentarios::where('id_comentario', $id)->get();
         if ($comentario[0]['img_usuario'] != 'img/admin/default.png') {
             unlink($comentario[0]['img_usuario']);
         }
 
-        if (Comentarios::where('id_comentario', $id)->delete() > 0) {
+        if (Comentarios::where('id_comentario', $comentario[0]['id_comentario'])->delete() > 0) {
             return 'ok';
         } else {
             return 'error';

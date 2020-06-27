@@ -1,10 +1,18 @@
-;
-(function() {
-    let tabla_admin = $("#tabla_usuario").DataTable({
+jQuery(document).ready(function($) {
+    // $.ajax({
+    //     url: url_host + "/news-mag/cms/public/banner",
+    //     success: function(respuesta) {
+    //         console.log("Success:", respuesta);
+    //     },
+    //     error: function(jqXHR, textStatus, errorThown) {
+    //         console.log("Error en: " + errorThown);
+    //     },
+    // });
+    let tabla_banner = $("#tabla_banner").DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: url_host + "/news-mag/cms/public/admin",
+            url: url_host + "/news-mag/cms/public/banner",
         },
         columnDefs: [{
             searchable: true,
@@ -15,39 +23,35 @@
             [0, "desc"]
         ],
         columns: [{
-            data: "id",
-            name: "id",
+            data: "id_banner",
+            name: "id_banner",
         }, {
-            data: "name",
-            name: "name",
+            data: "titulo_banner",
+            name: "titulo_banner",
         }, {
-            data: "email",
-            name: "email",
+            data: "descripcion_banner",
+            name: "descripcion_banner",
         }, {
-            data: "foto",
-            name: "foto",
+            data: "img_banner",
+            name: "img_banner",
             render: function(data, type, full, meta) {
                 if (data == null) {
-                    return `<img width="40px" class="rounded-circle" src="${url_host}/news-mag/cms/public/img/admin/default.png" >`;
+                    return `<img width="400" class="img-thumbnail" src="${url_host}/news-mag/cms/public/img/admin/default.png" >`;
                 } else {
-                    return `<img width="40px" class="rounded-circle" src="${url_host}/news-mag/cms/public/${data}" >`;
+                    return `<img width="400" class="img-thumbnail" src="${url_host}/news-mag/cms/public/${data}" >`;
                 }
             },
             orderable: false,
         }, {
-            data: "rol",
-            name: "rol",
-            render: function(data, type, full, meta) {
-                if (data == 1) {
-                    return "Administrador";
-                } else {
-                    return "Editor";
-                }
-            },
+            data: "pagina_banner",
+            name: "pagina_banner",
+        }, {
+            data: "fecha_banner",
+            name: "fecha_banner",
         }, {
             data: "acciones",
             name: "acciones",
-        }, ],
+        }],
         language: {
             sProcessing: "Procesando...",
             sLengthMenu: "Mostrar _MENU_ registros",
@@ -73,21 +77,67 @@
             },
         },
     });
-    tabla_admin.on("order.dt search.dt", function() {
-        tabla_admin.column(0, {
+    tabla_banner.on("order.dt search.dt", function() {
+        tabla_banner.column(0, {
             search: "applied",
             order: "applied",
         }).nodes().each(function(cell, i) {
             cell.innerHTML = +i + 1;
         });
     }).draw();
-    // $.ajax({
-    //     url: url_host + "/news-mag/cms/public/admin",
-    //     success: function (respuesta) {
-    //         console.log("Success:", respuesta);
-    //     },
-    //     error: function (jqXHR, textStatus, errorThown) {
-    //         console.log("Error en: " + errorThown);
-    //     },
-    // });
-})();
+    $(document).on("click", ".btn-eliminar-banner", function(e) {
+        let method = "DELETE",
+            action = $(this).attr("data-action"),
+            // token = $(this).children("[name='_token']").attr("value");
+            token = $(this).attr("data-token");
+        let padre = $(this).parent().parent();
+        notie.confirm({
+            text: "¿Esta seguro de eliminar este Registro?",
+            submitText: "Si, eliminar",
+            cancelText: "Cancelar",
+            submitCallback: function() {
+                let datos = new FormData();
+                datos.append("_method", method);
+                datos.append("_token", token);
+                $.ajax({
+                    url: action,
+                    method: "POST",
+                    data: datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(respuesta) {
+                        if (respuesta == "ok") {
+                            notie.alert({
+                                type: 1,
+                                text: "Eliminado correctamente",
+                                time: 7,
+                            });
+                            padre.remove();
+                            tabla_banner.on("order.dt search.dt", function() {
+                                tabla_banner.column(0, {
+                                    search: "applied",
+                                    order: "applied",
+                                }).nodes().each(function(cell, i) {
+                                    cell.innerHTML = +i + 1;
+                                });
+                            }).draw();
+                        } else {
+                            notie.alert({
+                                type: 3,
+                                text: "Error al intentar eliminar a un Admin",
+                                time: 7,
+                            });
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("Error en: " + errorThrown);
+                    },
+                });
+            },
+            cancelCallback: function() {
+                e.preventDefault();
+            },
+        });
+    });
+});

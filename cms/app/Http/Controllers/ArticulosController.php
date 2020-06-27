@@ -158,7 +158,7 @@ class ArticulosController extends Controller
         }
         if ($foto->guessExtension() == "png") {
             $img_old = imagecreatefrompng($foto);
-            $img_new = imagecreatetruecolor($foto);
+            $img_new = imagecreatetruecolor($ancho_nuevo, $alto_nuevo);
             imagealphablending($img_new, false);
             imagesavealpha($img_new, true);
             imagecopyresampled($img_new, $img_old, 0, 0, 0, 0, $ancho_nuevo, $alto_nuevo, $ancho_org, $alto_orig);

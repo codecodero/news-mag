@@ -1,10 +1,9 @@
-;
-(function() {
-    let tabla_admin = $("#tabla_usuario").DataTable({
+jQuery(document).ready(function($) {
+    let tabla_ads = $("#tabla_ads").DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: url_host + "/news-mag/cms/public/admin",
+            url: url_host + "/news-mag/cms/public/ads",
         },
         columnDefs: [{
             searchable: true,
@@ -15,35 +14,17 @@
             [0, "desc"]
         ],
         columns: [{
-            data: "id",
-            name: "id",
+            data: "id_ads",
+            name: "id_ads",
         }, {
-            data: "name",
-            name: "name",
+            data: "pagina_anuncio",
+            name: "pagina_anuncio",
         }, {
-            data: "email",
-            name: "email",
+            data: "ads",
+            name: "ads",
         }, {
-            data: "foto",
-            name: "foto",
-            render: function(data, type, full, meta) {
-                if (data == null) {
-                    return `<img width="40px" class="rounded-circle" src="${url_host}/news-mag/cms/public/img/admin/default.png" >`;
-                } else {
-                    return `<img width="40px" class="rounded-circle" src="${url_host}/news-mag/cms/public/${data}" >`;
-                }
-            },
-            orderable: false,
-        }, {
-            data: "rol",
-            name: "rol",
-            render: function(data, type, full, meta) {
-                if (data == 1) {
-                    return "Administrador";
-                } else {
-                    return "Editor";
-                }
-            },
+            data: "fecha_anuncio",
+            name: "fecha_anuncio",
         }, {
             data: "acciones",
             name: "acciones",
@@ -73,8 +54,8 @@
             },
         },
     });
-    tabla_admin.on("order.dt search.dt", function() {
-        tabla_admin.column(0, {
+    tabla_ads.on("order.dt search.dt", function() {
+        tabla_ads.column(0, {
             search: "applied",
             order: "applied",
         }).nodes().each(function(cell, i) {
@@ -82,12 +63,82 @@
         });
     }).draw();
     // $.ajax({
-    //     url: url_host + "/news-mag/cms/public/admin",
-    //     success: function (respuesta) {
+    //     url: url_host + "/news-mag/cms/public/ads",
+    //     success: function(respuesta) {
     //         console.log("Success:", respuesta);
     //     },
-    //     error: function (jqXHR, textStatus, errorThown) {
+    //     error: function(jqXHR, textStatus, errorThown) {
     //         console.log("Error en: " + errorThown);
     //     },
     // });
-})();
+    $(document).on("click", ".btn_eliminar_ads", function(e) {
+        let method = "DELETE",
+            action = $(this).attr("data-action"),
+            // token = $(this).children("[name='_token']").attr("value");
+            token = $(this).attr("data-token");
+        let padre = $(this).parent().parent();
+        notie.confirm({
+            text: "¿Esta seguro de eliminar este Registro?",
+            submitText: "Si, eliminar",
+            cancelText: "Cancelar",
+            submitCallback: function() {
+                let datos = new FormData();
+                datos.append("_method", method);
+                datos.append("_token", token);
+                console.log(action + token + method);
+                $.ajax({
+                    url: action,
+                    method: "POST",
+                    data: datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(respuesta) {
+                        if (respuesta == "ok") {
+                            notie.alert({
+                                type: 1,
+                                text: "Eliminado correctamente",
+                                time: 7,
+                            });
+                            padre.remove();
+                            tabla_ads.on("order.dt search.dt", function() {
+                                tabla_ads.column(0, {
+                                    search: "applied",
+                                    order: "applied",
+                                }).nodes().each(function(cell, i) {
+                                    cell.innerHTML = +i + 1;
+                                });
+                            }).draw();
+                        } else {
+                            notie.alert({
+                                type: 3,
+                                text: "Error al intentar eliminar a un Admin",
+                                time: 7,
+                            });
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        if (jqXHR.status === 0) {
+                            alert('Not connect: Verify Network.');
+                        } else if (jqXHR.status == 404) {
+                            alert('Requested page not found [404]');
+                        } else if (jqXHR.status == 500) {
+                            alert('Internal Server Error [500].');
+                        } else if (textStatus === 'parsererror') {
+                            alert('Requested JSON parse failed.');
+                        } else if (textStatus === 'timeout') {
+                            alert('Time out error.');
+                        } else if (textStatus === 'abort') {
+                            alert('Ajax request aborted.');
+                        } else {
+                            alert('Uncaught Error: ' + jqXHR.responseText);
+                        }
+                    },
+                });
+            },
+            cancelCallback: function() {
+                e.preventDefault();
+            },
+        });
+    });
+});
