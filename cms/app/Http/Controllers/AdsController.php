@@ -52,7 +52,7 @@ class AdsController extends Controller
                 $ads                 = new Ads();
                 $ads->pagina_anuncio = $datos['pagina_ads'];
                 $ads->codigo_anuncio = $datos['codigo_ads'];
-                dd($ads);
+                // dd($ads);
                 if ($ads->save() > 0) {
                     return redirect("/ads")->with("save_success", "");
                 } else {

@@ -85,7 +85,6 @@ jQuery(document).ready(function($) {
                 let datos = new FormData();
                 datos.append("_method", method);
                 datos.append("_token", token);
-                console.log(action + token + method);
                 $.ajax({
                     url: action,
                     method: "POST",

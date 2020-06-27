@@ -279,6 +279,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 			<!-- COLUMNA DERECHA -->
 			<div class="d-none d-md-block pt-md-4 pt-lg-0 col-md-4 col-lg-3">
+								<?php
+$data_ads = BlogControler::MostrarAds("sidebar");
+foreach ($data_ads as $ads => $ad) {
+    echo $ad['codigo_anuncio'];
+}
+?>
 				<!-- ARTÍCULOS RECIENTES -->
 				<?php
 PaginacionControl::config(1, 4, null, "SELECT a.id,a.id_categoria,c.categoria,c.descripcion as cat_descripcion,c.palabras_claves as palabras_claves_cat,a.img,a.titulo,a.descripcion,a.palabras_claves,a.ruta,a.contenido,a.vista,DATE_FORMAT(a.created_at,'%d.%m.%Y') as fecha FROM articulo a INNER JOIN categoria c ON c.id = a.id_categoria", 4);
@@ -303,7 +309,7 @@ $articles_recientes = PaginacionControl::MostrarFilas("id", "DESC");
 				</div>
 				<!-- PUBLICIDAD -->
 				<?php
-$data_ads = BlogControler::MostrarAds("articulo");
+$data_ads = BlogControler::MostrarAds("horizontal");
 foreach ($data_ads as $ads => $ad) {
     echo $ad['codigo_anuncio'];
 }

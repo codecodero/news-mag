@@ -13,8 +13,8 @@ class Conexion
         $this->driver     = "mysql:";
         $this->host       = "host=localhost;";
         $this->bd         = "dbname=news_mag";
-        $this->user       = "code";
-        $this->contrasena = "123456";
+        $this->user       = "root";
+        $this->contrasena = "";
     }
 
     public function Conectar()
