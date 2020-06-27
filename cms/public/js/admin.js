@@ -89,4 +89,59 @@ $(document).ready(function() {
             cell.innerHTML = +i + 1;
         });
     }).draw();
+    $(document).on("click", ".btn-eliminar", function(e) {
+        let method = "DELETE",
+            action = $(this).attr("data-action"),
+            // token = $(this).children("[name='_token']").attr("value");
+            token = $(this).attr("data-token");
+        let padre = $(this).parent().parent();
+        notie.confirm({
+            text: "¿Esta seguro de eliminar este Registro?",
+            submitText: "Si, eliminar",
+            cancelText: "Cancelar",
+            submitCallback: function() {
+                let datos = new FormData();
+                datos.append("_method", method);
+                datos.append("_token", token);
+                $.ajax({
+                    url: action,
+                    method: "POST",
+                    data: datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(respuesta) {
+                        if (respuesta == "ok") {
+                            notie.alert({
+                                type: 1,
+                                text: "Eliminado correctamente",
+                                time: 7,
+                            });
+                            padre.remove();
+                            tabla_admin.on("order.dt search.dt", function() {
+                                tabla_admin.column(0, {
+                                    search: "applied",
+                                    order: "applied",
+                                }).nodes().each(function(cell, i) {
+                                    cell.innertHTML = +i + 1;
+                                });
+                            }).draw();
+                        } else {
+                            notie.alert({
+                                type: 3,
+                                text: "Error al intentar eliminar a un Admin",
+                                time: 7,
+                            });
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("Error en: " + errorThrown);
+                    },
+                });
+            },
+            cancelCallback: function() {
+                e.preventDefault();
+            },
+        });
+    });
 });
