@@ -95,6 +95,13 @@
 						<a href="<?php echo $blog['dominio'] . "search/" . strtolower(preg_replace('/[0-9ñáéíóú ]/', '_', $etiquetas)); ?>" class="btn btn-secondary btn-sm m-1"><?php echo $etiquetas; ?></a>
 						<?php endforeach?>
 				</div>
+								<!-- PUBLICIDAD -->
+				<?php
+$data_ads = BlogControler::MostrarAds("sidebar");
+foreach ($data_ads as $ads => $ad) {
+    echo $ad['codigo_anuncio'];
+}
+?>
 
 				<!-- Artículos Destacados -->
 
@@ -138,7 +145,7 @@ $feacture_articles = PaginacionControl::MostrarFilas("vista", "DESC");
 
 				<!-- PUBLICIDAD -->
 				<?php
-$data_ads = BlogControler::MostrarAds("categorias");
+$data_ads = BlogControler::MostrarAds("horizontal");
 foreach ($data_ads as $ads => $ad) {
     echo $ad['codigo_anuncio'];
 }

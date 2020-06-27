@@ -78,6 +78,12 @@
 					<p class="small"><?php echo $blog['descripcion']; ?></p>
 
 				</div>
+								<?php
+$data_ads = BlogControler::MostrarAds("sidebar");
+foreach ($data_ads as $ads => $ad) {
+    echo $ad['codigo_anuncio'];
+}
+?>
 
 				<!-- Artículos destacados -->
 
